@@ -5,37 +5,41 @@ import Common.Constant.Constant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class LoginPage extends GeneralPage{
+public class LoginPage extends GeneralPage {
 
     // Locators
-    private final By _txtUsername = By.xpath("//input[@id='username']");
-    private final By _txtPassword = By.xpath("//input[@id='password']");
-    private final By _btnLogin = By.xpath("//input[@value='login']");
-    private final By _lblLoginErrorMsg = By.xpath("//p[@class='message error LoginForm']");
+    private final By txtEmailLocator = By.xpath("//input[@id='username']");
+    private final By txtPasswordLocator = By.xpath("//input[@id='password']");
+    private final By btnLoginLocator = By.xpath("//input[@value='login']");
+    private final By lblLoginErrorMsgLocator = By.xpath("//p[@class='message error LoginForm']");
 
     // Elements
-    public WebElement getTxtUsername() {
-        return Constant.WEBDRIVER.findElement(_txtUsername);
+    protected WebElement getTxtEmail() {
+        return Constant.WEBDRIVER.findElement(txtEmailLocator);
     }
 
-    public WebElement getTxtPassword() {
-        return Constant.WEBDRIVER.findElement(_txtPassword);
+    protected WebElement getTxtPassword() {
+        return Constant.WEBDRIVER.findElement(txtPasswordLocator);
     }
 
-    public WebElement getBtnLogin() {
-        return Constant.WEBDRIVER.findElement(_btnLogin);
+    protected WebElement getBtnLogin() {
+        return Constant.WEBDRIVER.findElement(btnLoginLocator);
     }
 
-    public WebElement getLblLoginErrorMsg() {
-        return Constant.WEBDRIVER.findElement(_lblLoginErrorMsg);
+    protected WebElement getLblLoginErrorMsg() {
+        return Constant.WEBDRIVER.findElement(lblLoginErrorMsgLocator);
     }
 
     // Methods
-    public LoginPage login(String username, String password) {
-        this.getTxtUsername().sendKeys(username);
+    public String getLoginErrorMessage() {
+        return getLblLoginErrorMsg().getText();
+    }
+
+    public LoginPage login(String email, String password) {
+        this.getTxtEmail().sendKeys(email);
         this.getTxtPassword().sendKeys(password);
 
-        Utilities.waitForElementClickable(Constant.WEBDRIVER, _btnLogin);
+        Utilities.waitForElementClickable(Constant.WEBDRIVER, btnLoginLocator);
 
         this.getBtnLogin().click();
         return this;
@@ -46,8 +50,24 @@ public class LoginPage extends GeneralPage{
     }
 
     public LoginPage expectFailure() {
-        Utilities.waitForElementVisibility(Constant.WEBDRIVER, _lblLoginErrorMsg);
+        Utilities.waitForElementVisibility(Constant.WEBDRIVER, lblLoginErrorMsgLocator);
         return this;
+    }
+
+    public By getTxtEmailLocator() {
+        return this.txtEmailLocator;
+    }
+
+    public By getTxtPasswordLocator() {
+        return this.txtPasswordLocator;
+    }
+
+    public By getBtnLoginLocator() {
+        return this.btnLoginLocator;
+    }
+
+    public By getLblLoginErrorMsgLocator() {
+        return this.lblLoginErrorMsgLocator;
     }
 }
 

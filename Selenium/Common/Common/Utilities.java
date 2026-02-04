@@ -1,5 +1,6 @@
 package Common.Common;
 
+import Common.Constant.Constant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,21 +11,37 @@ import java.time.Duration;
 
 public class Utilities {
 
-    private static final String ALPHANUMERIC = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static final SecureRandom random = new SecureRandom();
 
-    public static String generateRandomString(Integer length) {
+    public static String generateRandomString(String charset, Integer length) {
         if (length == null || length <= 0) {
             throw new IllegalArgumentException("Length must be a positive integer");
         }
 
         StringBuilder result = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
-            int index = random.nextInt(ALPHANUMERIC.length());
-            result.append(ALPHANUMERIC.charAt(index));
+            int index = random.nextInt(charset.length());
+            result.append(charset.charAt(index));
         }
 
         return result.toString();
+    }
+
+    /**
+     * Returns random string with set length, contains only alphanumeric
+     * @param length length of generated string
+     * @return random string
+     */
+    public static String generateRandomString(Integer length) {
+        return generateRandomString(Constant.LOWERCASE_ALPHA + Constant.UPPERCASE_ALPHA + Constant.NUMERICAL, length);
+    }
+
+    /**
+     * Returns password containing: uppercase letter, lowercase letter, numbers, and special characters that is 14 characters long
+     * @return random password
+     */
+    public static String generateRandomPassword() {
+        return "1Wa$" + generateRandomString(Constant.LOWERCASE_ALPHA + Constant.UPPERCASE_ALPHA + Constant.NUMERICAL + Constant.SPECIAL_CHARACTERS, 10);
     }
 
     public static String generateRandomEmail() {
