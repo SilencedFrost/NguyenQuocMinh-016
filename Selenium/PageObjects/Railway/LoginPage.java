@@ -35,7 +35,7 @@ public class LoginPage extends GeneralPage{
         this.getTxtPassword().sendKeys(password);
         this.getBtnLogin().click();
 
-        // Land on Home page
+        // Land on home page
         return new HomePage();
     }
 
@@ -44,7 +44,7 @@ public class LoginPage extends GeneralPage{
         this.getTxtPassword().sendKeys(password);
         this.getBtnLogin().click();
 
-        // Land on Home page
+        // Return back at login page
         return this;
     }
 }
