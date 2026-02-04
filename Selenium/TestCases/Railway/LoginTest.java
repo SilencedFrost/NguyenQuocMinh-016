@@ -2,7 +2,6 @@ package TestCases.Railway;
 
 import Common.Common.Utilities;
 import Common.Constant.Constant;
-import PageObjects.Railway.GeneralPage;
 import PageObjects.Railway.HomePage;
 import PageObjects.Railway.LoginPage;
 
@@ -42,12 +41,12 @@ public class LoginTest {
         String actualMsg = lblWelcomeMessage.getText();
         String expectedMsg = "Welcome " + Constant.USERNAME;
 
-        Assert.assertEquals(actualMsg, expectedMsg, "Welcome message is not displayed as expected");
+        Assert.assertEquals(actualMsg.trim(), expectedMsg.trim(), "Welcome message is not displayed as expected");
     }
 
     @Test
     public void TC02() {
-        System.out.println("User cannot log in with blank \"Username\" textbox");
+        System.out.println("TC02 - User cannot log in with blank \"Username\" textbox");
         HomePage homePage = new HomePage();
         homePage.open();
 
@@ -56,12 +55,12 @@ public class LoginTest {
         String actualMsg = loginPage.login("", Constant.PASSWORD).expectFailure().getLblLoginErrorMsg().getText();
         String expectedMsg =  "There was a problem with your login and/or errors exist in your form.";
 
-        Assert.assertEquals(actualMsg, expectedMsg, "Error message is not displayed as expected");
+        Assert.assertEquals(actualMsg.trim(), expectedMsg.trim(), "Error message is not displayed as expected");
     }
 
     @Test
     public void TC03() {
-        System.out.println("User cannot log into Railway with invalid password");
+        System.out.println("TC03 - User cannot log into Railway with invalid password");
         HomePage homePage = new HomePage();
         homePage.open();
 
@@ -71,6 +70,6 @@ public class LoginTest {
         String actualMsg = loginPage.login(Constant.USERNAME, Utilities.generateRandomString(10)).expectFailure().getLblLoginErrorMsg().getText();
         String expectedMsg =  "There was a problem with your login and/or errors exist in your form.";
 
-        Assert.assertEquals(actualMsg, expectedMsg, "Error message is not displayed as expected");
+        Assert.assertEquals(actualMsg.trim(), expectedMsg.trim(), "Error message is not displayed as expected");
     }
 }
