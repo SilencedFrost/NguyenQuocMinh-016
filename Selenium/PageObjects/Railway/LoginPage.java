@@ -30,13 +30,22 @@ public class LoginPage extends GeneralPage{
     }
 
     // Methods
-    public HomePage login(String username, String password) {
+    public HomePage loginSuccess(String username, String password) {
         this.getTxtUsername().sendKeys(username);
         this.getTxtPassword().sendKeys(password);
         this.getBtnLogin().click();
 
         // Land on Home page
         return new HomePage();
+    }
+
+    public LoginPage loginFail(String username, String password) {
+        this.getTxtUsername().sendKeys(username);
+        this.getTxtPassword().sendKeys(password);
+        this.getBtnLogin().click();
+
+        // Land on Home page
+        return this;
     }
 }
 

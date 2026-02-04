@@ -20,12 +20,11 @@ public class GeneralPage {
         return Constant.WEBDRIVER.findElement(tabLogout);
     }
 
-    protected WebElement getLblWelcomeMessage() {
+    public WebElement getLblWelcomeMessage() {
         return Constant.WEBDRIVER.findElement(lblWelcomeMessage);
     }
 
     // Methods
-
     public String getWelcomeMessage() {
         return this.getLblWelcomeMessage().getText();
     }
