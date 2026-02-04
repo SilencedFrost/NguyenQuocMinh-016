@@ -5,6 +5,8 @@ import Common.Constant.Constant;
 import PageObjects.Railway.GeneralPage;
 import PageObjects.Railway.HomePage;
 import PageObjects.Railway.LoginPage;
+
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -35,9 +37,9 @@ public class LoginTest {
 
         LoginPage loginPage = homePage.gotoLoginPage();
 
-        GeneralPage generalPage = loginPage.login(Constant.USERNAME, Constant.PASSWORD).expectSuccess();
-        Utilities.waitForElementVisibility(Constant.WEBDRIVER, generalPage.getLblWelcomeMessage());
-        String actualMsg = generalPage.getWelcomeMessage();
+        WebElement lblWelcomeMessage = loginPage.login(Constant.USERNAME, Constant.PASSWORD).expectSuccess().getLblWelcomeMessage();
+        Utilities.waitForElementVisibility(Constant.WEBDRIVER, lblWelcomeMessage);
+        String actualMsg = lblWelcomeMessage.getText();
         String expectedMsg = "Welcome " + Constant.USERNAME;
 
         Assert.assertEquals(actualMsg, expectedMsg, "Welcome message is not displayed as expected");
