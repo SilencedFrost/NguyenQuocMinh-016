@@ -34,6 +34,9 @@ public class LoginPage extends GeneralPage{
     public LoginPage login(String username, String password) {
         this.getTxtUsername().sendKeys(username);
         this.getTxtPassword().sendKeys(password);
+
+        Utilities.waitForElementClickable(Constant.WEBDRIVER, _btnLogin);
+
         this.getBtnLogin().click();
         return this;
     }
@@ -43,7 +46,7 @@ public class LoginPage extends GeneralPage{
     }
 
     public LoginPage expectFailure() {
-        Utilities.waitForElementVisibility(Constant.WEBDRIVER, this.getLblLoginErrorMsg());
+        Utilities.waitForElementVisibility(Constant.WEBDRIVER, _lblLoginErrorMsg);
         return this;
     }
 }

@@ -7,7 +7,5 @@ public class Constant {
 
     public static WebDriver WEBDRIVER;
     public static final String RAILWAY_URL = "http://saferailway.somee.com/Page/HomePage.cshtml";
-    public static final String USERNAME = "minhnguyenq2006@gmail.com";
-    public static final String PASSWORD = "DefaultP4$$";
 
 }

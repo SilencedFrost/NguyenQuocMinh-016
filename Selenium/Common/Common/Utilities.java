@@ -1,7 +1,7 @@
 package Common.Common;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -39,12 +39,21 @@ public class Utilities {
         return username + "@" + domain;
     }
 
-    public static void waitForElementVisibility(WebDriver driver, WebElement element, Duration time) {
+    public static void waitForElementVisibility(WebDriver driver, By locator, Duration time) {
         WebDriverWait wait = new WebDriverWait(driver, time);
-        wait.until(ExpectedConditions.visibilityOf(element));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    public static void waitForElementVisibility(WebDriver driver, WebElement element) {
-        waitForElementVisibility(driver, element, Duration.ofSeconds(10));
+    public static void waitForElementVisibility(WebDriver driver, By locator) {
+        waitForElementVisibility(driver, locator, Duration.ofSeconds(10));
+    }
+
+    public static void waitForElementClickable(WebDriver driver, By locator, Duration time) {
+        WebDriverWait wait = new WebDriverWait(driver, time);
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public static void waitForElementClickable(WebDriver driver, By locator) {
+        waitForElementClickable(driver, locator, Duration.ofSeconds(10));
     }
 }
