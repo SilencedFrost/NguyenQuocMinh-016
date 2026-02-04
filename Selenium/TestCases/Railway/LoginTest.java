@@ -35,7 +35,7 @@ public class LoginTest {
 
         LoginPage loginPage = homePage.gotoLoginPage();
 
-        GeneralPage generalPage = loginPage.loginSuccess(Constant.USERNAME, Constant.PASSWORD);
+        GeneralPage generalPage = loginPage.login(Constant.USERNAME, Constant.PASSWORD).expectSuccess();
         Utilities.waitForElementVisibility(Constant.WEBDRIVER, generalPage.getLblWelcomeMessage());
         String actualMsg = generalPage.getWelcomeMessage();
         String expectedMsg = "Welcome " + Constant.USERNAME;
@@ -51,7 +51,7 @@ public class LoginTest {
 
         LoginPage loginPage = homePage.gotoLoginPage();
 
-        String actualMsg = loginPage.loginFail("", Constant.PASSWORD).getLblLoginErrorMsg().getText();
+        String actualMsg = loginPage.login("", Constant.PASSWORD).expectFailure().getLblLoginErrorMsg().getText();
         String expectedMsg =  "There was a problem with your login and/or errors exist in your form.";
 
         Assert.assertEquals(actualMsg, expectedMsg, "Error message is not displayed as expected");
@@ -66,7 +66,7 @@ public class LoginTest {
         LoginPage loginPage = homePage.gotoLoginPage();
 
         //Random password with length of 10
-        String actualMsg = loginPage.loginFail(Constant.USERNAME, Utilities.generateRandomString(10)).getLblLoginErrorMsg().getText();
+        String actualMsg = loginPage.login(Constant.USERNAME, Utilities.generateRandomString(10)).expectFailure().getLblLoginErrorMsg().getText();
         String expectedMsg =  "There was a problem with your login and/or errors exist in your form.";
 
         Assert.assertEquals(actualMsg, expectedMsg, "Error message is not displayed as expected");

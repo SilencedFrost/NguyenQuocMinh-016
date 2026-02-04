@@ -1,5 +1,6 @@
 package PageObjects.Railway;
 
+import Common.Common.Utilities;
 import Common.Constant.Constant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -30,21 +31,19 @@ public class LoginPage extends GeneralPage{
     }
 
     // Methods
-    public HomePage loginSuccess(String username, String password) {
+    public LoginPage login(String username, String password) {
         this.getTxtUsername().sendKeys(username);
         this.getTxtPassword().sendKeys(password);
         this.getBtnLogin().click();
+        return this;
+    }
 
-        // Land on home page
+    public HomePage expectSuccess() {
         return new HomePage();
     }
 
-    public LoginPage loginFail(String username, String password) {
-        this.getTxtUsername().sendKeys(username);
-        this.getTxtPassword().sendKeys(password);
-        this.getBtnLogin().click();
-
-        // Return back at login page
+    public LoginPage expectFailure() {
+        Utilities.waitForElementVisibility(Constant.WEBDRIVER, this.getLblLoginErrorMsg());
         return this;
     }
 }
