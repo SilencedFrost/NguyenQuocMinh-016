@@ -18,6 +18,7 @@ public class LogoutTest extends BaseTest{
         // Data
         UserAccount userAccount = new UserAccount();
 
+        // Actions
         System.out.println("1. Navigate to QA Railway Website");
         System.out.println("2. Login with valid Email and Password");
         HomePage homePage = ((LoginPage) new HomePage().open().gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword()).expectSuccess();
@@ -26,8 +27,11 @@ public class LogoutTest extends BaseTest{
         FaqPage faqPage = (FaqPage) homePage.gotoPage(MenuItem.FAQ);
 
         System.out.println("4. Click on \"Log out\" tab");
-        faqPage.clickLogout();
+        homePage = faqPage.clickLogout();
 
+        //Assertion
+        System.out.println("Home page displays. \"Log out\" tab is disappeared.");
+        Assert.assertTrue(homePage.isPageShown());
         Assert.assertFalse(Utilities.isElementPresent(faqPage.getTabLogoutLocator()));
     }
 }

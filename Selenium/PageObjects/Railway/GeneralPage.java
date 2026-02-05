@@ -4,10 +4,10 @@ import Common.Common.Utilities;
 import Common.Constant.MenuItem;
 import org.openqa.selenium.By;
 
-public class GeneralPage {
+public abstract class GeneralPage {
 
     //Locators
-    private final By tabHomeLocator = By.xpath("//a[@href='../']");
+    private final By tabHomeLocator = By.xpath("//div[@id='menu']//a[@href='../']");
     private final By tabFaqLocator = By.xpath("//div[@id='menu']//a[@href='/Page/FAQ.cshtml']");
     private final By tabRegisterLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Register.cshtml']");
     private final By tabLoginLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Login.cshtml']");
@@ -16,6 +16,8 @@ public class GeneralPage {
     private final By lblWelcomeMessageLocator = By.xpath("//div[@class='account']/strong");
 
     // Methods
+    abstract boolean isPageShown();
+
     public String getWelcomeMessage() {
         return Utilities.findElement(lblWelcomeMessageLocator).getText();
     }

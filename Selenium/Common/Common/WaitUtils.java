@@ -2,16 +2,18 @@ package Common.Common;
 
 import Common.Constant.Constant;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Objects;
 
 public class WaitUtils {
 
     // Waits
-    public static By waitForElementVisibility(By locator, Duration time) {
-        WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, time);
+    public static By waitForElementVisibility(By locator, Duration timeout) {
+        WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, timeout);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return locator;
     }
@@ -20,13 +22,23 @@ public class WaitUtils {
         return waitForElementVisibility(locator, Constant.TIMEOUT);
     }
 
-    public static By waitForElementClickable(By locator, Duration time) {
-        WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, time);
+    public static By waitForElementClickable(By locator, Duration timeout) {
+        WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, timeout);
         wait.until(ExpectedConditions.elementToBeClickable(locator));
         return locator;
     }
 
     public static By waitForElementClickable(By locator) {
         return waitForElementClickable(locator, Constant.TIMEOUT);
+    }
+
+    public static void waitForPageLoad(Duration timeout) {
+        WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, timeout);
+        wait.until(webDriver -> Objects.equals(((JavascriptExecutor) webDriver)
+                .executeScript("return document.readyState"), "complete"));
+    }
+
+    public static void waitForPageLoad() {
+        waitForPageLoad(Constant.TIMEOUT);
     }
 }

@@ -8,7 +8,7 @@ public class RandomUtils {
     public static final String LOWERCASE_ALPHA = "abcdefghijklmnopqrstuvwxyz";
     public static final String UPPERCASE_ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     public static final String NUMERICAL = "0123456789";
-    public static final String SPECIAL_CHARACTERS = "! @ # $ % ^ & * ( ) - _ = + [ ] { } \\ | ; : ' \" , . < > / ? ~ `";
+    public static final String SPECIAL_CHARACTERS = "!@$^*()-_=+[]{}\\|;:\",./?~`";
 
     private static final SecureRandom random = new SecureRandom();
 

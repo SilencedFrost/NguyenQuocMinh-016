@@ -1,16 +1,35 @@
 package PageObjects.Railway;
 
+import Common.Common.Utilities;
 import Common.Constant.Constant;
+import org.openqa.selenium.By;
 
 public class HomePage extends GeneralPage{
 
     // Locators
+    private final By btnCreateAccountLocator = By.xpath("//div[@id='content']//a[@href='/Account/Register.cshtml']");
 
     // Elements
 
     // Methods
+    @Override
+    public boolean isPageShown() {
+        return Utilities.isElementPresent(By.xpath("//div[@id='menu']//a[@href='../']/parent::li[@class='selected']"));
+    }
+
     public HomePage open() {
         Constant.WEBDRIVER.navigate().to(Constant.RAILWAY_URL);
         return this;
     }
+
+    public RegisterPage clickCreateAccount() {
+        Utilities.click(btnCreateAccountLocator);
+        return new RegisterPage();
+    }
+
+    public By getBtnCreateAccountLocator() {
+        return this.btnCreateAccountLocator;
+    }
+
+
 }

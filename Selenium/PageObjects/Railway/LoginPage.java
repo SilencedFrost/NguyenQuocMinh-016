@@ -13,6 +13,11 @@ public class LoginPage extends GeneralPage {
     private final By lblLoginErrorMsgLocator = By.xpath("//p[@class='message error LoginForm']");
 
     // Methods
+    @Override
+    public boolean isPageShown() {
+        return Utilities.isElementPresent(By.xpath("//div[@id='menu']//a[@href='/Account/Login.cshtml']/parent::li[@class='selected']"));
+    }
+
     public String getLoginErrorMessage() {
         return Utilities.findElement(lblLoginErrorMsgLocator).getText();
     }

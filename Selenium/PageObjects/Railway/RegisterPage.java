@@ -1,6 +1,7 @@
 package PageObjects.Railway;
 
 import Common.Common.Utilities;
+import Common.Common.WaitUtils;
 import org.openqa.selenium.By;
 
 public class RegisterPage extends GeneralPage {
@@ -13,11 +14,17 @@ public class RegisterPage extends GeneralPage {
 
     private final By lblPasswordErrorMsgLocator = By.xpath("//label[@for='password' and @class='validation-error']");
     private final By lblPidErrorMsgLocator = By.xpath("//label[@for='pid' and @class='validation-error']");
+    private final By lblRegisterErrorMsgLocator = By.xpath("//p[@class='message error']");
+    private final By lblTitleLocator = By.xpath("//div[@id='content']/h1");
 
     private final By btnRegisterLocator = By.xpath("//input[@value='Register']");
-    private final By lblRegisterErrorMsgLocator = By.xpath("//p[@class='message error']");
 
     // Methods
+    @Override
+    public boolean isPageShown() {
+        return Utilities.isElementPresent(By.xpath("//div[@id='menu']//a[@href='/Account/Register.cshtml']/parent::li[@class='selected']"));
+    }
+
     public String getRegisterErrorMsg() {
         return Utilities.findElement(lblRegisterErrorMsgLocator).getText();
     }
@@ -28,6 +35,11 @@ public class RegisterPage extends GeneralPage {
 
     public String getPidErrorMsg() {
         return Utilities.findElement(lblPidErrorMsgLocator).getText();
+    }
+
+    public String getTitle() {
+        WaitUtils.waitForPageLoad();
+        return Utilities.findElement(lblTitleLocator).getText();
     }
 
     public RegisterPage register(String email, String password, String confirmPassword, String pid) {

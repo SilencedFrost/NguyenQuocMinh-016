@@ -9,5 +9,6 @@ public class Constant {
 
     public static WebDriver WEBDRIVER;
     public static final String RAILWAY_URL = "http://saferailway.somee.com/Page/HomePage.cshtml";
+    public static final String GUERRILLA_URL = "https://www.guerrillamail.com/inbox";
     public static final Duration TIMEOUT = Duration.ofSeconds(10);
 }
