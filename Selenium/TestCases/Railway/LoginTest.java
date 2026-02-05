@@ -1,7 +1,7 @@
 package TestCases.Railway;
 
-import Common.Common.Random;
-import Common.Common.Utilities;
+import Common.Common.RandomUtils;
+import Common.Common.WaitUtils;
 import Common.Constant.MenuItem;
 import DataObjects.Railway.UserAccount;
 import PageObjects.Railway.HomePage;
@@ -27,7 +27,7 @@ public class LoginTest extends BaseTest{
         System.out.println("3. Enter valid Email and Password");
         System.out.println("4. Click on \"Login\" button");
         HomePage homePage = loginPage.login(userAccount.getEmail(), userAccount.getPassword()).expectSuccess();
-        Utilities.waitForElementVisibility(homePage.getLblWelcomeMessageLocator());
+        WaitUtils.waitForElementVisibility(homePage.getLblWelcomeMessageLocator());
 
         String actualMsg = homePage.getWelcomeMessage();
 
@@ -69,7 +69,7 @@ public class LoginTest extends BaseTest{
         System.out.println("3. Enter valid Email and invalid Password");
         System.out.println("4. Click on \"Login\" button");
 
-        String actualMsg = loginPage.login(userAccount.getEmail(), Random.generateRandomPassword()).expectFailure().getLoginErrorMessage();
+        String actualMsg = loginPage.login(userAccount.getEmail(), RandomUtils.generateRandomPassword()).expectFailure().getLoginErrorMessage();
 
         Assert.assertEquals(actualMsg.trim(), expectedMsg.trim(), "Error message is not displayed as expected");
     }
@@ -93,7 +93,7 @@ public class LoginTest extends BaseTest{
 
             System.out.println("3. Enter valid information into \"Username\" textbox except \"Password\" textbox.");
             System.out.println("4. Click on \"Login\" button");
-            String actualLoginMsg = loginPage.login(userAccount.getEmail(), Random.generateRandomPassword()).expectFailure().getLoginErrorMessage();
+            String actualLoginMsg = loginPage.login(userAccount.getEmail(), RandomUtils.generateRandomPassword()).expectFailure().getLoginErrorMessage();
 
             Assert.assertEquals(actualLoginMsg.trim(), expectedLoginMsg.trim(), "Error message is not displayed as expected");
         }
@@ -108,7 +108,7 @@ public class LoginTest extends BaseTest{
         System.out.println("TC05 - User can't login with an account hasn't been activated");
 
         // Data
-        UserAccount userAccount = new UserAccount(Random.generateRandomEmail(), Random.generateRandomPassword(), Random.generateRandomString(Random.NUMERICAL, 10));
+        UserAccount userAccount = new UserAccount(RandomUtils.generateRandomEmail(), RandomUtils.generateRandomPassword(), RandomUtils.generateRandomString(RandomUtils.NUMERICAL, 10));
         String expectedMsg = "Invalid username or password. Please try again.";
 
         System.out.println("1. Navigate to QA Railway Website");

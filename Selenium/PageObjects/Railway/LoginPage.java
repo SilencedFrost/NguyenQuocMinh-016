@@ -1,6 +1,7 @@
 package PageObjects.Railway;
 
 import Common.Common.Utilities;
+import Common.Common.WaitUtils;
 import org.openqa.selenium.By;
 
 public class LoginPage extends GeneralPage {
@@ -29,7 +30,7 @@ public class LoginPage extends GeneralPage {
     }
 
     public LoginPage expectFailure() {
-        Utilities.waitForElementVisibility(lblLoginErrorMsgLocator);
+        WaitUtils.waitForElementVisibility(lblLoginErrorMsgLocator);
         return this;
     }
 

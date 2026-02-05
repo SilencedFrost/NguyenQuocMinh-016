@@ -2,7 +2,7 @@ package Common.Common;
 
 import java.security.SecureRandom;
 
-public class Random {
+public class RandomUtils {
 
     //Charsets
     public static final String LOWERCASE_ALPHA = "abcdefghijklmnopqrstuvwxyz";
@@ -32,7 +32,7 @@ public class Random {
      * @return random string
      */
     public static String generateRandomString(Integer length) {
-        return generateRandomString(Random.LOWERCASE_ALPHA + Random.UPPERCASE_ALPHA + Random.NUMERICAL, length);
+        return generateRandomString(RandomUtils.LOWERCASE_ALPHA + RandomUtils.UPPERCASE_ALPHA + RandomUtils.NUMERICAL, length);
     }
 
     /**
@@ -40,7 +40,7 @@ public class Random {
      * @return random password
      */
     public static String generateRandomPassword() {
-        return "1Wa$" + generateRandomString(Random.LOWERCASE_ALPHA + Random.UPPERCASE_ALPHA + Random.NUMERICAL + Random.SPECIAL_CHARACTERS, 10);
+        return "1Wa$" + generateRandomString(RandomUtils.LOWERCASE_ALPHA + RandomUtils.UPPERCASE_ALPHA + RandomUtils.NUMERICAL + RandomUtils.SPECIAL_CHARACTERS, 10);
     }
 
     public static String generateRandomEmail() {
