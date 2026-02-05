@@ -3,10 +3,10 @@ package Common.Common;
 import Common.Constant.Constant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 import java.util.List;
 
@@ -23,7 +23,6 @@ public class Utilities {
     }
 
     // Finds
-
     public static WebElement findElement(By locator) {
         return Constant.WEBDRIVER.findElement(locator);
     }
@@ -33,21 +32,29 @@ public class Utilities {
     }
 
     // Waits
-    public static void waitForElementVisibility(WebDriver driver, By locator, Duration time) {
-        WebDriverWait wait = new WebDriverWait(driver, time);
+    public static By waitForElementVisibility(By locator, Duration time) {
+        WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, time);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return locator;
     }
 
-    public static void waitForElementVisibility(WebDriver driver, By locator) {
-        waitForElementVisibility(driver, locator, Constant.TIMEOUT);
+    public static By waitForElementVisibility(By locator) {
+        return waitForElementVisibility(locator, Constant.TIMEOUT);
     }
 
-    public static void waitForElementClickable(WebDriver driver, By locator, Duration time) {
-        WebDriverWait wait = new WebDriverWait(driver, time);
+    public static By waitForElementClickable(By locator, Duration time) {
+        WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, time);
         wait.until(ExpectedConditions.elementToBeClickable(locator));
+        return locator;
     }
 
-    public static void waitForElementClickable(WebDriver driver, By locator) {
-        waitForElementClickable(driver, locator, Constant.TIMEOUT);
+    public static By waitForElementClickable(By locator) {
+        return waitForElementClickable(locator, Constant.TIMEOUT);
+    }
+
+    // Click
+    public static void click(By locator){
+        waitForElementClickable(locator);
+        findElement(locator).click();
     }
 }

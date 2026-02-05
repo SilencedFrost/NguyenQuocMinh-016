@@ -2,7 +2,6 @@ package TestCases.Railway;
 
 import Common.Common.Random;
 import Common.Common.Utilities;
-import Common.Constant.Constant;
 import Common.Constant.MenuItem;
 import DataObjects.Railway.UserAccount;
 import PageObjects.Railway.HomePage;
@@ -28,7 +27,7 @@ public class LoginTest extends BaseTest{
         System.out.println("3. Enter valid Email and Password");
         System.out.println("4. Click on \"Login\" button");
         HomePage homePage = loginPage.login(userAccount.getEmail(), userAccount.getPassword()).expectSuccess();
-        Utilities.waitForElementVisibility(Constant.WEBDRIVER, homePage.getLblWelcomeMessageLocator());
+        Utilities.waitForElementVisibility(homePage.getLblWelcomeMessageLocator());
 
         String actualMsg = homePage.getWelcomeMessage();
 

@@ -23,26 +23,26 @@ public class GeneralPage {
     public GeneralPage gotoPage(MenuItem menuItem) {
         return switch (menuItem) {
             case HOME -> {
-                Utilities.findElement(tabHomeLocator).click();
+                Utilities.click(tabHomeLocator);
                 yield new HomePage();
             }
             case FAQ -> {
-                Utilities.findElement(tabFaqLocator).click();
+                Utilities.click(tabFaqLocator);
                 yield new FaqPage();
             }
             case REGISTER -> {
-                Utilities.findElement(tabRegisterLocator).click();
+                Utilities.click(tabRegisterLocator);
                 yield new RegisterPage();
             }
             case LOGIN -> {
-                Utilities.findElement(tabLoginLocator).click();
+                Utilities.click(tabLoginLocator);
                 yield new LoginPage();
             }
         };
     }
 
     public HomePage clickLogout() {
-        Utilities.findElement(tabLogoutLocator).click();
+        Utilities.click(tabLogoutLocator);
         return new HomePage();
     }
 

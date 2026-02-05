@@ -9,8 +9,6 @@ import PageObjects.Railway.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.awt.*;
-
 public class LogoutTest extends BaseTest{
 
     @Test

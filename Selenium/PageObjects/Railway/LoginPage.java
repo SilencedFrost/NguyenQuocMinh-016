@@ -1,9 +1,7 @@
 package PageObjects.Railway;
 
 import Common.Common.Utilities;
-import Common.Constant.Constant;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 public class LoginPage extends GeneralPage {
 
@@ -22,9 +20,7 @@ public class LoginPage extends GeneralPage {
         Utilities.findElement(txtEmailLocator).sendKeys(email);
         Utilities.findElement(txtPasswordLocator).sendKeys(password);
 
-        Utilities.waitForElementClickable(Constant.WEBDRIVER, btnLoginLocator);
-
-        Utilities.findElement(btnLoginLocator).click();
+        Utilities.click(btnLoginLocator);
         return this;
     }
 
@@ -33,7 +29,7 @@ public class LoginPage extends GeneralPage {
     }
 
     public LoginPage expectFailure() {
-        Utilities.waitForElementVisibility(Constant.WEBDRIVER, lblLoginErrorMsgLocator);
+        Utilities.waitForElementVisibility(lblLoginErrorMsgLocator);
         return this;
     }
 

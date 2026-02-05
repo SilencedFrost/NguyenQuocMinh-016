@@ -1,7 +1,6 @@
 package PageObjects.Railway;
 
 import Common.Common.Utilities;
-import Common.Constant.Constant;
 import org.openqa.selenium.By;
 
 public class RegisterPage extends GeneralPage {
@@ -37,9 +36,7 @@ public class RegisterPage extends GeneralPage {
         Utilities.findElement(txtPidLocator).sendKeys(pid);
         Utilities.findElement(txtConfirmPasswordLocator).sendKeys(confirmPassword);
 
-        Utilities.waitForElementClickable(Constant.WEBDRIVER, btnRegisterLocator);
-
-        Utilities.findElement(btnRegisterLocator).click();
+        Utilities.click(btnRegisterLocator);
         return this;
     }
 
