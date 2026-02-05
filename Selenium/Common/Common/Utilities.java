@@ -56,6 +56,10 @@ public class Utilities {
         return username + "@" + domain;
     }
 
+    public static boolean isElementPresent(By locator) {
+        return !Constant.WEBDRIVER.findElements(locator).isEmpty();
+    }
+
     public static void waitForElementVisibility(WebDriver driver, By locator, Duration time) {
         WebDriverWait wait = new WebDriverWait(driver, time);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));

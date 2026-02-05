@@ -10,6 +10,7 @@ public class GeneralPage {
     private final By tabLoginLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Login.cshtml']");
     private final By tabLogoutLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Logout']");
     private final By tabRegisterLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Register.cshtml']");
+    private final By tabFaqLocator = By.xpath("//div[@id='menu']//a[@href='/Page/FAQ.cshtml']");
     private final By lblWelcomeMessageLocator = By.xpath("//div[@class='account']/strong");
 
     //Elements
@@ -23,6 +24,10 @@ public class GeneralPage {
 
     protected WebElement getTabRegister() {
         return Constant.WEBDRIVER.findElement(tabRegisterLocator);
+    }
+
+    protected WebElement getTabFaq() {
+        return Constant.WEBDRIVER.findElement(tabFaqLocator);
     }
 
     protected WebElement getLblWelcomeMessage() {
@@ -39,22 +44,32 @@ public class GeneralPage {
         return new LoginPage();
     }
 
+    public HomePage clickLogout() {
+        this.getTabLogout().click();
+        return new HomePage();
+    }
+
     public RegisterPage gotoRegisterPage() {
         this.getTabRegister().click();
         return new RegisterPage();
     }
 
-    public By getTabLoginLocator() {
-        return this.tabLoginLocator;
+    public FaqPage gotoFaqPage() {
+        this.getTabFaq().click();
+        return new FaqPage();
     }
+
+//    public By getTabLoginLocator() {
+//        return this.tabLoginLocator;
+//    }
 
     public By getTabLogoutLocator() {
         return this.tabLogoutLocator;
     }
 
-    public By getTabRegisterLocator() {
-        return this.tabRegisterLocator;
-    }
+//    public By getTabRegisterLocator() {
+//        return this.tabRegisterLocator;
+//    }
 
     public By getLblWelcomeMessageLocator() {
         return this.lblWelcomeMessageLocator;
