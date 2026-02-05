@@ -1,5 +1,6 @@
 package TestCases.Railway;
 
+import Common.Constant.MenuItem;
 import DataObjects.Railway.UserAccount;
 import PageObjects.Railway.HomePage;
 import PageObjects.Railway.RegisterPage;
@@ -16,10 +17,8 @@ public class RegisterTest extends BaseTest{
         UserAccount userAccount = new UserAccount();
 
         System.out.println("1. Navigate to QA Railway Website");
-        HomePage homePage = new HomePage().open();
-
         System.out.println("2. Click on \"Register\" tab");
-        RegisterPage registerPage = homePage.gotoRegisterPage();
+        RegisterPage registerPage = (RegisterPage) new HomePage().open().gotoPage(MenuItem.REGISTER);
 
         System.out.println("3. Enter information of the created account in Pre-condition");
         System.out.println("4. Click on \"Register\" button");
@@ -42,10 +41,8 @@ public class RegisterTest extends BaseTest{
         String expectedRegisterErrorMsg = "There're errors in the form. Please correct the errors and try again.";
 
         System.out.println("1. Navigate to QA Railway Website");
-        HomePage homePage = new HomePage().open();
-
         System.out.println("2. Click on \"Register\" tab");
-        RegisterPage registerPage = homePage.gotoRegisterPage();
+        RegisterPage registerPage = (RegisterPage) new HomePage().open().gotoPage(MenuItem.REGISTER);
 
         System.out.println("3. Enter valid email address and leave other fields empty");
         System.out.println("4. Click on \"Register\" button");

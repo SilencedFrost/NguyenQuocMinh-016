@@ -1,62 +1,49 @@
 package PageObjects.Railway;
 
-import Common.Constant.Constant;
+import Common.Common.Utilities;
+import Common.Constant.MenuItem;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 public class GeneralPage {
 
     //Locators
+    private final By tabHomeLocator = By.xpath("//a[@href='../']");
+    private final By tabFaqLocator = By.xpath("//div[@id='menu']//a[@href='/Page/FAQ.cshtml']");
+    private final By tabRegisterLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Register.cshtml']");
     private final By tabLoginLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Login.cshtml']");
     private final By tabLogoutLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Logout']");
-    private final By tabRegisterLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Register.cshtml']");
-    private final By tabFaqLocator = By.xpath("//div[@id='menu']//a[@href='/Page/FAQ.cshtml']");
+
     private final By lblWelcomeMessageLocator = By.xpath("//div[@class='account']/strong");
-
-    //Elements
-    protected WebElement getTabLogin() {
-        return Constant.WEBDRIVER.findElement(tabLoginLocator);
-    }
-
-    protected WebElement getTabLogout() {
-        return Constant.WEBDRIVER.findElement(tabLogoutLocator);
-    }
-
-    protected WebElement getTabRegister() {
-        return Constant.WEBDRIVER.findElement(tabRegisterLocator);
-    }
-
-    protected WebElement getTabFaq() {
-        return Constant.WEBDRIVER.findElement(tabFaqLocator);
-    }
-
-    protected WebElement getLblWelcomeMessage() {
-        return Constant.WEBDRIVER.findElement(lblWelcomeMessageLocator);
-    }
 
     // Methods
     public String getWelcomeMessage() {
-        return this.getLblWelcomeMessage().getText();
+        return Utilities.findElement(lblWelcomeMessageLocator).getText();
     }
 
-    public LoginPage gotoLoginPage() {
-        this.getTabLogin().click();
-        return new LoginPage();
+    public GeneralPage gotoPage(MenuItem menuItem) {
+        return switch (menuItem) {
+            case HOME -> {
+                Utilities.findElement(tabHomeLocator).click();
+                yield new HomePage();
+            }
+            case FAQ -> {
+                Utilities.findElement(tabFaqLocator).click();
+                yield new FaqPage();
+            }
+            case REGISTER -> {
+                Utilities.findElement(tabRegisterLocator).click();
+                yield new RegisterPage();
+            }
+            case LOGIN -> {
+                Utilities.findElement(tabLoginLocator).click();
+                yield new LoginPage();
+            }
+        };
     }
 
     public HomePage clickLogout() {
-        this.getTabLogout().click();
+        Utilities.findElement(tabLogoutLocator).click();
         return new HomePage();
-    }
-
-    public RegisterPage gotoRegisterPage() {
-        this.getTabRegister().click();
-        return new RegisterPage();
-    }
-
-    public FaqPage gotoFaqPage() {
-        this.getTabFaq().click();
-        return new FaqPage();
     }
 
 //    public By getTabLoginLocator() {

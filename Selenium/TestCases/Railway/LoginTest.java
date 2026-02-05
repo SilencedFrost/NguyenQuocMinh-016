@@ -3,6 +3,7 @@ package TestCases.Railway;
 import Common.Common.Random;
 import Common.Common.Utilities;
 import Common.Constant.Constant;
+import Common.Constant.MenuItem;
 import DataObjects.Railway.UserAccount;
 import PageObjects.Railway.HomePage;
 import PageObjects.Railway.LoginPage;
@@ -21,14 +22,12 @@ public class LoginTest extends BaseTest{
         String expectedMsg = "Welcome " + userAccount.getEmail();
 
         System.out.println("1. Navigate to QA Railway Website");
-        HomePage homePage = new HomePage().open();
-
         System.out.println("2. Click on \"Login\" tab");
-        LoginPage loginPage = homePage.gotoLoginPage();
+        LoginPage loginPage = (LoginPage) new HomePage().open().gotoPage(MenuItem.LOGIN);
 
         System.out.println("3. Enter valid Email and Password");
         System.out.println("4. Click on \"Login\" button");
-        homePage = loginPage.login(userAccount.getEmail(), userAccount.getPassword()).expectSuccess();
+        HomePage homePage = loginPage.login(userAccount.getEmail(), userAccount.getPassword()).expectSuccess();
         Utilities.waitForElementVisibility(Constant.WEBDRIVER, homePage.getLblWelcomeMessageLocator());
 
         String actualMsg = homePage.getWelcomeMessage();
@@ -45,11 +44,8 @@ public class LoginTest extends BaseTest{
         String expectedMsg =  "There was a problem with your login and/or errors exist in your form.";
 
         System.out.println("1. Navigate to QA Railway Website");
-        HomePage homePage = new HomePage();
-        homePage.open();
-
         System.out.println("2. Click on \"Login\" tab");
-        LoginPage loginPage = homePage.gotoLoginPage();
+        LoginPage loginPage = (LoginPage) new HomePage().open().gotoPage(MenuItem.LOGIN);
 
         System.out.println("3. User doesn't type any words into \"Username\" textbox but enter valid information into \"Password\" textbox");
         System.out.println("4. Click on \"Login\" button");
@@ -68,11 +64,8 @@ public class LoginTest extends BaseTest{
         String expectedMsg =  "There was a problem with your login and/or errors exist in your form.";
 
         System.out.println("1. Navigate to QA Railway Website");
-        HomePage homePage = new HomePage();
-        homePage.open();
-
         System.out.println("2. Click on \"Login\" tab");
-        LoginPage loginPage = homePage.gotoLoginPage();
+        LoginPage loginPage = (LoginPage) new HomePage().open().gotoPage(MenuItem.LOGIN);
 
         System.out.println("3. Enter valid Email and invalid Password");
         System.out.println("4. Click on \"Login\" button");
@@ -92,13 +85,11 @@ public class LoginTest extends BaseTest{
         String expectedAttemptWarningMsg =  "You have used 4 out of 5 login attempts. After all 5 have been used, you will be unable to login for 15 minutes.";
 
         System.out.println("1. Navigate to QA Railway Website");
-        HomePage homePage = new HomePage();
-        homePage.open();
-
         System.out.println("2. Click on \"Login\" tab");
-        LoginPage loginPage = homePage.gotoLoginPage();
+        LoginPage loginPage = (LoginPage) new HomePage().open().gotoPage(MenuItem.LOGIN);
 
-        for(int i = 1; i <= 3; i++) {
+        // Loop 4 times
+        for(int i = 1; i <= 4; i++) {
             System.out.printf("Attempt number %d\n", i);
 
             System.out.println("3. Enter valid information into \"Username\" textbox except \"Password\" textbox.");
@@ -116,22 +107,19 @@ public class LoginTest extends BaseTest{
     @Test
     public void TC05() {
         System.out.println("TC05 - User can't login with an account hasn't been activated");
-        System.out.println("Setting up preconditions");
 
         // Data
         UserAccount userAccount = new UserAccount(Random.generateRandomEmail(), Random.generateRandomPassword(), Random.generateRandomString(Random.NUMERICAL, 10));
         String expectedMsg = "Invalid username or password. Please try again.";
 
         System.out.println("1. Navigate to QA Railway Website");
-        HomePage homePage = new HomePage();
-        homePage.open();
-
-        RegisterPage registerPage = homePage.gotoRegisterPage();
-
-        System.out.println("2. Click on \"Login\" tab");
-        LoginPage loginPage = registerPage.register(userAccount.getEmail(), userAccount.getPassword(), userAccount.getPid()).gotoLoginPage();
+        System.out.println("Setting up preconditions");
+        RegisterPage registerPage = ((RegisterPage) new HomePage().open().gotoPage(MenuItem.REGISTER)).register(userAccount.getEmail(), userAccount.getPassword(), userAccount.getPid());
 
         // Start test case
+        System.out.println("2. Click on \"Login\" tab");
+        LoginPage loginPage = (LoginPage) registerPage.gotoPage(MenuItem.LOGIN);
+
         System.out.println("3. Enter username and password of account hasn't been activated.");
         System.out.println("4. Click on \"Login\" button");
 

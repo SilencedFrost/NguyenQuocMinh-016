@@ -1,12 +1,15 @@
 package TestCases.Railway;
 
 import Common.Common.Utilities;
+import Common.Constant.MenuItem;
 import DataObjects.Railway.UserAccount;
 import PageObjects.Railway.FaqPage;
 import PageObjects.Railway.HomePage;
 import PageObjects.Railway.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.awt.*;
 
 public class LogoutTest extends BaseTest{
 
@@ -18,14 +21,11 @@ public class LogoutTest extends BaseTest{
         UserAccount userAccount = new UserAccount();
 
         System.out.println("1. Navigate to QA Railway Website");
-        HomePage homePage = new HomePage().open();
-
         System.out.println("2. Login with valid Email and Password");
-        LoginPage loginPage = homePage.gotoLoginPage();
-        homePage = loginPage.login(userAccount.getEmail(), userAccount.getPassword()).expectSuccess();
+        HomePage homePage = ((LoginPage) new HomePage().open().gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword()).expectSuccess();
 
         System.out.println("3. Click on \"FAQ\" tab");
-        FaqPage faqPage = homePage.gotoFaqPage();
+        FaqPage faqPage = (FaqPage) homePage.gotoPage(MenuItem.FAQ);
 
         System.out.println("4. Click on \"Log out\" tab");
         faqPage.clickLogout();
