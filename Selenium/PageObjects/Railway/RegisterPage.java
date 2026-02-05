@@ -12,6 +12,10 @@ public class RegisterPage extends GeneralPage {
     private final By txtPasswordLocator = By.xpath("//input[@id='password']");
     private final By txtConfirmPasswordLocator = By.xpath("//input[@id='confirmPassword']");
     private final By txtPidLocator = By.xpath("//input[@id='pid']");
+
+    private final By lblPasswordErrorMsgLocator = By.xpath("//label[@for='password' and @class='validation-error']");
+    private final By lblPidErrorMsgLocator = By.xpath("//label[@for='pid' and @class='validation-error']");
+
     private final By btnRegisterLocator = By.xpath("//input[@value='Register']");
     private final By lblRegisterErrorMsgLocator = By.xpath("//p[@class='message error']");
 
@@ -32,6 +36,14 @@ public class RegisterPage extends GeneralPage {
         return Constant.WEBDRIVER.findElement(txtPidLocator);
     }
 
+    protected WebElement getLblPasswordErrorMsg() {
+        return Constant.WEBDRIVER.findElement(lblPasswordErrorMsgLocator);
+    }
+
+    protected WebElement getLblPidErrorMsg() {
+        return Constant.WEBDRIVER.findElement(lblPidErrorMsgLocator);
+    }
+
     protected WebElement getBtnRegister() {
         return Constant.WEBDRIVER.findElement(btnRegisterLocator);
     }
@@ -41,6 +53,18 @@ public class RegisterPage extends GeneralPage {
     }
 
     // Methods
+    public String getRegisterErrorMsg() {
+        return this.getLblRegisterErrorMsg().getText();
+    }
+
+    public String getPasswordErrorMsg() {
+        return this.getLblPasswordErrorMsg().getText();
+    }
+
+    public String getPidErrorMsg() {
+        return this.getLblPidErrorMsg().getText();
+    }
+
     public RegisterPage register(String email, String password, String confirmPassword, String pid) {
         this.getTxtEmail().sendKeys(email);
         this.getTxtConfirmPassword().sendKeys(confirmPassword);
@@ -57,29 +81,29 @@ public class RegisterPage extends GeneralPage {
         return this.register(email, password, password, pid);
     }
 
-    public By getTxtUsernameLocator() {
-        return this.txtUsernameLocator;
-    }
-
-    public By getTxtPasswordLocator() {
-        return this.txtPasswordLocator;
-    }
-
-    public By getTxtConfirmPasswordLocator() {
-        return this.txtConfirmPasswordLocator;
-    }
-
-    public By getTxtPidLocator() {
-        return this.txtPidLocator;
-    }
-
-    public By getBtnRegisterLocator() {
-        return this.btnRegisterLocator;
-    }
-
-    public By getLblRegisterErrorMsgLocator() {
-        return this.lblRegisterErrorMsgLocator;
-    }
+//    public By getTxtUsernameLocator() {
+//        return this.txtUsernameLocator;
+//    }
+//
+//    public By getTxtPasswordLocator() {
+//        return this.txtPasswordLocator;
+//    }
+//
+//    public By getTxtConfirmPasswordLocator() {
+//        return this.txtConfirmPasswordLocator;
+//    }
+//
+//    public By getTxtPidLocator() {
+//        return this.txtPidLocator;
+//    }
+//
+//    public By getBtnRegisterLocator() {
+//        return this.btnRegisterLocator;
+//    }
+//
+//    public By getLblRegisterErrorMsgLocator() {
+//        return this.lblRegisterErrorMsgLocator;
+//    }
 }
 
 

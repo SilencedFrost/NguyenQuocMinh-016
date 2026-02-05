@@ -32,7 +32,7 @@ public class LoginPage extends GeneralPage {
 
     // Methods
     public String getLoginErrorMessage() {
-        return getLblLoginErrorMsg().getText();
+        return this.getLblLoginErrorMsg().getText();
     }
 
     public LoginPage login(String email, String password) {
@@ -54,21 +54,21 @@ public class LoginPage extends GeneralPage {
         return this;
     }
 
-    public By getTxtEmailLocator() {
-        return this.txtEmailLocator;
-    }
-
-    public By getTxtPasswordLocator() {
-        return this.txtPasswordLocator;
-    }
-
-    public By getBtnLoginLocator() {
-        return this.btnLoginLocator;
-    }
-
-    public By getLblLoginErrorMsgLocator() {
-        return this.lblLoginErrorMsgLocator;
-    }
+//    public By getTxtEmailLocator() {
+//        return this.txtEmailLocator;
+//    }
+//
+//    public By getTxtPasswordLocator() {
+//        return this.txtPasswordLocator;
+//    }
+//
+//    public By getBtnLoginLocator() {
+//        return this.btnLoginLocator;
+//    }
+//
+//    public By getLblLoginErrorMsgLocator() {
+//        return this.lblLoginErrorMsgLocator;
+//    }
 }
 
 
