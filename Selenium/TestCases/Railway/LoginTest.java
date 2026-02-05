@@ -1,5 +1,6 @@
 package TestCases.Railway;
 
+import Common.Common.Random;
 import Common.Common.Utilities;
 import Common.Constant.Constant;
 import DataObjects.Railway.UserAccount;
@@ -72,7 +73,7 @@ public class LoginTest extends BaseTest{
 
         System.out.println("3. Enter valid Email and invalid Password");
         System.out.println("4. Click on \"Login\" button");
-        String actualMsg = loginPage.login(userAccount.getEmail(), Utilities.generateRandomPassword()).expectFailure().getLoginErrorMessage();
+        String actualMsg = loginPage.login(userAccount.getEmail(), Random.generateRandomPassword()).expectFailure().getLoginErrorMessage();
         String expectedMsg =  "There was a problem with your login and/or errors exist in your form.";
 
         Assert.assertEquals(actualMsg.trim(), expectedMsg.trim(), "Error message is not displayed as expected");
@@ -97,7 +98,7 @@ public class LoginTest extends BaseTest{
 
             System.out.println("3. Enter valid information into \"Username\" textbox except \"Password\" textbox.");
             System.out.println("4. Click on \"Login\" button");
-            String actualMsg = loginPage.login(userAccount.getEmail(), Utilities.generateRandomPassword()).expectFailure().getLoginErrorMessage();
+            String actualMsg = loginPage.login(userAccount.getEmail(), Random.generateRandomPassword()).expectFailure().getLoginErrorMessage();
             String expectedMsg =  "Invalid username or password. Please try again.";
 
             Assert.assertEquals(actualMsg.trim(), expectedMsg.trim(), "Error message is not displayed as expected");
@@ -117,7 +118,7 @@ public class LoginTest extends BaseTest{
         System.out.println("Setting up preconditions");
 
         // Data
-        UserAccount userAccount = new UserAccount(Utilities.generateRandomEmail(), Utilities.generateRandomPassword(), Utilities.generateRandomString(Constant.NUMERICAL, 10));
+        UserAccount userAccount = new UserAccount(Random.generateRandomEmail(), Random.generateRandomPassword(), Random.generateRandomString(Random.NUMERICAL, 10));
 
         System.out.println("1. Navigate to QA Railway Website");
         HomePage homePage = new HomePage();
