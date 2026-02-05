@@ -52,9 +52,7 @@ public class RegisterTest extends BaseTest{
         registerPage.register(userAccount.getEmail(), "", "");
 
         String actualRegisterErrorMsg = registerPage.getRegisterErrorMsg();
-
         String actualPasswordErrorMsg = registerPage.getPasswordErrorMsg();
-
         String actualPidErrorMsg = registerPage.getPidErrorMsg();
 
         Assert.assertEquals(actualRegisterErrorMsg.trim(), expectedRegisterErrorMsg.trim(), "Register error message is not displayed as expected");

@@ -25,7 +25,7 @@ public class Utilities {
     }
 
     public static void waitForElementVisibility(WebDriver driver, By locator) {
-        waitForElementVisibility(driver, locator, Duration.ofSeconds(10));
+        waitForElementVisibility(driver, locator, Constant.TIMEOUT);
     }
 
     public static void waitForElementClickable(WebDriver driver, By locator, Duration time) {
@@ -34,6 +34,6 @@ public class Utilities {
     }
 
     public static void waitForElementClickable(WebDriver driver, By locator) {
-        waitForElementClickable(driver, locator, Duration.ofSeconds(10));
+        waitForElementClickable(driver, locator, Constant.TIMEOUT);
     }
 }
