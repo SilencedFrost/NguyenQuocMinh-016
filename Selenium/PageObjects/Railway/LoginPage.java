@@ -13,35 +13,18 @@ public class LoginPage extends GeneralPage {
     private final By btnLoginLocator = By.xpath("//input[@value='login']");
     private final By lblLoginErrorMsgLocator = By.xpath("//p[@class='message error LoginForm']");
 
-    // Elements
-    protected WebElement getTxtEmail() {
-        return Constant.WEBDRIVER.findElement(txtEmailLocator);
-    }
-
-    protected WebElement getTxtPassword() {
-        return Constant.WEBDRIVER.findElement(txtPasswordLocator);
-    }
-
-    protected WebElement getBtnLogin() {
-        return Constant.WEBDRIVER.findElement(btnLoginLocator);
-    }
-
-    protected WebElement getLblLoginErrorMsg() {
-        return Constant.WEBDRIVER.findElement(lblLoginErrorMsgLocator);
-    }
-
     // Methods
     public String getLoginErrorMessage() {
-        return this.getLblLoginErrorMsg().getText();
+        return Utilities.findElement(lblLoginErrorMsgLocator).getText();
     }
 
     public LoginPage login(String email, String password) {
-        this.getTxtEmail().sendKeys(email);
-        this.getTxtPassword().sendKeys(password);
+        Utilities.findElement(txtEmailLocator).sendKeys(email);
+        Utilities.findElement(txtPasswordLocator).sendKeys(password);
 
         Utilities.waitForElementClickable(Constant.WEBDRIVER, btnLoginLocator);
 
-        this.getBtnLogin().click();
+        Utilities.findElement(btnLoginLocator).click();
         return this;
     }
 

@@ -3,12 +3,11 @@ package PageObjects.Railway;
 import Common.Common.Utilities;
 import Common.Constant.Constant;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 public class RegisterPage extends GeneralPage {
 
     // Locators
-    private final By txtUsernameLocator = By.xpath("//input[@id='email']");
+    private final By txtEmailLocator = By.xpath("//input[@id='email']");
     private final By txtPasswordLocator = By.xpath("//input[@id='password']");
     private final By txtConfirmPasswordLocator = By.xpath("//input[@id='confirmPassword']");
     private final By txtPidLocator = By.xpath("//input[@id='pid']");
@@ -19,61 +18,28 @@ public class RegisterPage extends GeneralPage {
     private final By btnRegisterLocator = By.xpath("//input[@value='Register']");
     private final By lblRegisterErrorMsgLocator = By.xpath("//p[@class='message error']");
 
-    // Elements
-    protected WebElement getTxtEmail() {
-        return Constant.WEBDRIVER.findElement(txtUsernameLocator);
-    }
-
-    protected WebElement getTxtPassword() {
-        return Constant.WEBDRIVER.findElement(txtPasswordLocator);
-    }
-
-    protected WebElement getTxtConfirmPassword() {
-        return Constant.WEBDRIVER.findElement(txtConfirmPasswordLocator);
-    }
-
-    protected WebElement getTxtPid() {
-        return Constant.WEBDRIVER.findElement(txtPidLocator);
-    }
-
-    protected WebElement getLblPasswordErrorMsg() {
-        return Constant.WEBDRIVER.findElement(lblPasswordErrorMsgLocator);
-    }
-
-    protected WebElement getLblPidErrorMsg() {
-        return Constant.WEBDRIVER.findElement(lblPidErrorMsgLocator);
-    }
-
-    protected WebElement getBtnRegister() {
-        return Constant.WEBDRIVER.findElement(btnRegisterLocator);
-    }
-
-    protected WebElement getLblRegisterErrorMsg() {
-        return Constant.WEBDRIVER.findElement(lblRegisterErrorMsgLocator);
-    }
-
     // Methods
     public String getRegisterErrorMsg() {
-        return this.getLblRegisterErrorMsg().getText();
+        return Utilities.findElement(lblRegisterErrorMsgLocator).getText();
     }
 
     public String getPasswordErrorMsg() {
-        return this.getLblPasswordErrorMsg().getText();
+        return Utilities.findElement(lblPasswordErrorMsgLocator).getText();
     }
 
     public String getPidErrorMsg() {
-        return this.getLblPidErrorMsg().getText();
+        return Utilities.findElement(lblPidErrorMsgLocator).getText();
     }
 
     public RegisterPage register(String email, String password, String confirmPassword, String pid) {
-        this.getTxtEmail().sendKeys(email);
-        this.getTxtConfirmPassword().sendKeys(confirmPassword);
-        this.getTxtPassword().sendKeys(password);
-        this.getTxtPid().sendKeys(pid);
+        Utilities.findElement(txtPasswordLocator).sendKeys(password);
+        Utilities.findElement(txtEmailLocator).sendKeys(email);
+        Utilities.findElement(txtPidLocator).sendKeys(pid);
+        Utilities.findElement(txtConfirmPasswordLocator).sendKeys(confirmPassword);
 
         Utilities.waitForElementClickable(Constant.WEBDRIVER, btnRegisterLocator);
 
-        this.getBtnRegister().click();
+        Utilities.findElement(btnRegisterLocator).click();
         return this;
     }
 
