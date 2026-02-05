@@ -34,9 +34,12 @@ public class RegisterTest extends BaseTest{
     @Test
     public void TC08() {
         System.out.println("User can't create account while password and PID fields are empty");
+        String expectedPasswordErrorMsg = "Invalid password length";
+        String expectedPidErrorMsg = "Invalid ID length";
 
         // Data
         UserAccount userAccount = new UserAccount();
+        String expectedRegisterErrorMsg = "There're errors in the form. Please correct the errors and try again.";
 
         System.out.println("1. Navigate to QA Railway Website");
         HomePage homePage = new HomePage().open();
@@ -49,13 +52,10 @@ public class RegisterTest extends BaseTest{
         registerPage.register(userAccount.getEmail(), "", "");
 
         String actualRegisterErrorMsg = registerPage.getRegisterErrorMsg();
-        String expectedRegisterErrorMsg = "There're errors in the form. Please correct the errors and try again.";
 
         String actualPasswordErrorMsg = registerPage.getPasswordErrorMsg();
-        String expectedPasswordErrorMsg = "Invalid password length";
 
         String actualPidErrorMsg = registerPage.getPidErrorMsg();
-        String expectedPidErrorMsg = "Invalid ID length";
 
         Assert.assertEquals(actualRegisterErrorMsg.trim(), expectedRegisterErrorMsg.trim(), "Register error message is not displayed as expected");
         Assert.assertEquals(actualPasswordErrorMsg.trim(), expectedPasswordErrorMsg.trim(), "Password error message is not displayed as expected");
