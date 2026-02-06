@@ -48,7 +48,7 @@ public class Utilities {
 
     public static By scrollToElement(By locator, Duration timeout) {
         JavascriptExecutor js = (JavascriptExecutor) Constant.WEBDRIVER;
-        js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center', inline: 'nearest'});", findElement(locator));
+        js.executeScript("arguments[0].scrollIntoView({behavior: 'instant', block: 'center', inline: 'nearest'});", findElement(locator));
         return locator;
     }
 
