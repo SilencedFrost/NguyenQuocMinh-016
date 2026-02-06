@@ -55,8 +55,19 @@ public class Utilities {
         return scrollToElement(locator, Constant.FIND_ELEMENT_TIMEOUT);
     }
 
+    private static ArrayList<String> getTabs() {
+        return new ArrayList<>(Constant.WEBDRIVER.getWindowHandles());
+    }
+
     public static void switchToLatestWindow() {
-        ArrayList<String> tabs = new ArrayList<>(Constant.WEBDRIVER.getWindowHandles());
-        Constant.WEBDRIVER.switchTo().window(tabs.getLast());
+        Constant.WEBDRIVER.switchTo().window(getTabs().getLast());
+    }
+
+    public static void switchToWindowIndex(int index) {
+        Constant.WEBDRIVER.switchTo().window(getTabs().get(index));
+    }
+
+    public static void switchToFirstWindow() {
+        switchToWindowIndex(0);
     }
 }

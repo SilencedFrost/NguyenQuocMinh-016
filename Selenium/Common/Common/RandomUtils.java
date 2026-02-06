@@ -4,7 +4,7 @@ import java.security.SecureRandom;
 
 public class RandomUtils {
 
-    //Charsets
+    // Charsets
     public static final String LOWERCASE_ALPHA = "abcdefghijklmnopqrstuvwxyz";
     public static final String UPPERCASE_ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     public static final String NUMERICAL = "0123456789";

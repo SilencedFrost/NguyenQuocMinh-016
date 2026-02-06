@@ -13,7 +13,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void beforeMethod() {
-        System.out.println("Pre-condition");
+        log.info("Pre-condition");
 
         Constant.WEBDRIVER = new ChromeDriver();
         Constant.WEBDRIVER.manage().window().maximize();
@@ -21,7 +21,7 @@ public class BaseTest {
 
     @AfterMethod
     public void afterMethod() {
-        System.out.println("Post-condition");
+        log.info("Post-condition");
 
         Constant.WEBDRIVER.quit();
     }

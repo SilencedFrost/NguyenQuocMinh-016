@@ -29,7 +29,7 @@ public class LogoutTest extends BaseTest{
         log.info("4. Click on \"Log out\" tab");
         homePage = faqPage.clickLogout();
 
-        //Assertion
+        // Assertion
         log.info("Home page displays. \"Log out\" tab is disappeared.");
         Assert.assertTrue(homePage.isPageShown());
         Assert.assertFalse(Utilities.isElementPresent(faqPage.getTabLogoutLocator()));

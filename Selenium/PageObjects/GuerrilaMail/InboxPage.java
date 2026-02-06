@@ -10,8 +10,8 @@ public class InboxPage {
     // Locators
     private final By btnInboxIdLocator = By.xpath("//span[@id='inbox-id']");
     private final By btnSetInboxIdLocator = By.xpath("//span[@id='inbox-id']/button[contains(@class, 'save')]");
-    private final String btnMailTitleLocatorString = "//tbody[@id='email_list']//td[contains(. ,'%s')]";
-    private final String btnMailLinkLocatorString = "//a[contains(., '%s')]";
+    private final String btnMailTitleLocatorString = "//tbody[@id='email_list']//td[contains(.,'%s')]";
+    private final String btnMailLinkLocatorString = "//a[contains(@href, '%s')]";
 
     private final By txtInboxIdLocator = By.xpath("//span[@id='inbox-id']/input");
 

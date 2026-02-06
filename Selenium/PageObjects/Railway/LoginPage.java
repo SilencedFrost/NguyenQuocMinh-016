@@ -9,13 +9,21 @@ public class LoginPage extends GeneralPage {
     // Locators
     private final By txtEmailLocator = By.xpath("//input[@id='username']");
     private final By txtPasswordLocator = By.xpath("//input[@id='password']");
+
     private final By btnLoginLocator = By.xpath("//input[@value='login']");
+    private final By btnForgotPasswordLocator = By.xpath("//a[@href='/Account/ForgotPassword.cshtml']");
+
     private final By lblLoginErrorMsgLocator = By.xpath("//p[@class='message error LoginForm']");
 
     // Methods
     @Override
     public boolean isPageShown() {
         return Utilities.isElementPresent(By.xpath("//div[@id='menu']//a[@href='/Account/Login.cshtml']/parent::li[@class='selected']"));
+    }
+
+    public ForgotPasswordPage clickForgotPassword() {
+        Utilities.click(btnForgotPasswordLocator);
+        return new ForgotPasswordPage();
     }
 
     public String getLoginErrorMessage() {

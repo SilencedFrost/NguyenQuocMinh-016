@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 
 public abstract class GeneralPage {
 
-    //Locators
+    // Locators
     private final By tabHomeLocator = By.xpath("//div[@id='menu']//a[@href='../']");
     private final By tabFaqLocator = By.xpath("//div[@id='menu']//a[@href='/Page/FAQ.cshtml']");
     private final By tabRegisterLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Register.cshtml']");

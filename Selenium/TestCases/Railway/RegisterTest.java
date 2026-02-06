@@ -86,6 +86,7 @@ public class RegisterTest extends BaseTest{
                 RandomUtils.generateRandomPassword(),
                 // Random Pid
                 RandomUtils.generateRandomString(RandomUtils.NUMERICAL, 12));
+        String mailTitle = "Please confirm your account";
         String expectedRegisterMsg = "Thank you for registering your account";
         String expectedConfirmationMsg = "Registration Confirmed! You can now log in to the site.";
 
@@ -127,10 +128,10 @@ public class RegisterTest extends BaseTest{
         guerrillaInboxPage.setMailUsername(userAccount.getUsername());
 
         log.info("7. Open email with subject containing \"Please confirm your account\"  and the email of the new account at step 3");
-        guerrillaInboxPage.openMailTitle("Please confirm your account");
+        guerrillaInboxPage.openMailTitle(mailTitle);
 
         log.info("8. Click on the activate link");
-        guerrillaInboxPage.clickLinkContains(Constant.RAILWAY_CONFIRM_URL);
+        guerrillaInboxPage.clickLinkContains(Constant.RAILWAY_CONFIRM_REGISTRATION_URL);
         Utilities.switchToLatestWindow();
 
         log.info("Redirect to Railways page and message \"Registration Confirmed! You can now log in to the site\" is shown");
