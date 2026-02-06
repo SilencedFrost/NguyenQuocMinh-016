@@ -23,12 +23,14 @@ public class RegisterAccountFlow {
     public static RegisterPage activate(String username) {
         // Activate
         Constant.WEBDRIVER.switchTo().newWindow(WindowType.TAB);
+        Utilities.closeFirstWindow();
         new InboxPage().open()
                 .setMailUsername(username)
                 .openMailTitle("Please confirm your account")
                 .clickLinkContains(Constant.RAILWAY_CONFIRM_REGISTRATION_URL);
         // Focus on confirmation tab
         Utilities.switchToLatestWindow();
+        Utilities.closeFirstWindow();
         return new RegisterPage();
 
     }

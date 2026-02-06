@@ -93,7 +93,6 @@ public class RegisterTest extends BaseTest{
 
         // Actions
         log.info("2. Click on \"Create an account\"");
-
         RegisterPage registerPage = homePage.clickCreateAccount();
 
         // Assertion
@@ -114,6 +113,7 @@ public class RegisterTest extends BaseTest{
         // Actions
         log.info("5. Get email information (webmail address, mailbox and password) and navigate to that webmail");
         Constant.WEBDRIVER.switchTo().newWindow(WindowType.TAB);
+        Utilities.closeFirstWindow();
         InboxPage guerrillaInboxPage = new InboxPage().open();
 
         log.info("6. Login to the mailbox");
@@ -125,11 +125,12 @@ public class RegisterTest extends BaseTest{
         log.info("8. Click on the activate link");
         guerrillaInboxPage.clickLinkContains(Constant.RAILWAY_CONFIRM_REGISTRATION_URL);
         Utilities.switchToLatestWindow();
+        Utilities.closeFirstWindow();
 
+        //Assertion
         log.info("Redirect to Railways page and message \"Registration Confirmed! You can now log in to the site\" is shown");
         String actualConfirmationMsg = registerPage.getConfirmMsg();
 
-        //Assertion
         Assert.assertEquals(actualConfirmationMsg.trim(), expectedConfirmationMsg.trim(), "Confirmation message is not displayed as expected");
     }
 }

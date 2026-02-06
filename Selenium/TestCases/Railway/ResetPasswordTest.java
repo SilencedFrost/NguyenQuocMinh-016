@@ -43,6 +43,7 @@ public class ResetPasswordTest extends BaseTest{
 
         log.info("5. Login to the mailbox (the same mailbox when creating account)");
         Constant.WEBDRIVER.switchTo().newWindow(WindowType.TAB);
+        Utilities.closeFirstWindow();
         InboxPage guerrillaInboxPage = new InboxPage().open().setMailUsername(userAccount.getUsername());
 
         log.info("6. Open email with subject containing \"Please reset your password\" and the email of the account at step 3");
@@ -51,6 +52,7 @@ public class ResetPasswordTest extends BaseTest{
         log.info("7. Click on reset link");
         guerrillaInboxPage.clickLinkContains(Constant.RAILWAY_RESET_PASSWORD_URL);
         Utilities.switchToLatestWindow();
+        Utilities.closeFirstWindow();
         ChangePasswordPage changePasswordPage = new ChangePasswordPage();
 
         // Assertion
@@ -97,6 +99,7 @@ public class ResetPasswordTest extends BaseTest{
 
         log.info("5. Login to the mailbox (the same mailbox when creating account)");
         Constant.WEBDRIVER.switchTo().newWindow(WindowType.TAB);
+        Utilities.closeFirstWindow();
         InboxPage guerrillaInboxPage = new InboxPage().open().setMailUsername(userAccount.getUsername());
 
         log.info("6. Open email with subject containing \"Please reset your password\" and the email of the account at step 3");
@@ -105,6 +108,7 @@ public class ResetPasswordTest extends BaseTest{
         log.info("7. Click on reset link");
         guerrillaInboxPage.clickLinkContains(Constant.RAILWAY_RESET_PASSWORD_URL);
         Utilities.switchToLatestWindow();
+        Utilities.closeFirstWindow();
         ChangePasswordPage changePasswordPage = new ChangePasswordPage();
 
         // Assertion
