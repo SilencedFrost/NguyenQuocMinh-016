@@ -7,11 +7,7 @@ import org.openqa.selenium.By;
 public abstract class GeneralPage {
 
     // Locators
-    private final By tabHomeLocator = By.xpath("//div[@id='menu']//a[@href='../']");
-    private final By tabFaqLocator = By.xpath("//div[@id='menu']//a[@href='/Page/FAQ.cshtml']");
-    private final By tabBookTicketLocator = By.xpath("//div[@id='menu']//a[@href='/Page/BookTicketPage.cshtml']");
-    private final By tabRegisterLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Register.cshtml']");
-    private final By tabLoginLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Login.cshtml']");
+    private final String genericTabLocatorString = "//div[@id='menu']//a[@href='%s']";
     private final By tabLogoutLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Logout']");
 
     private final By lblWelcomeMessageLocator = By.xpath("//div[@class='account']/strong");
@@ -24,27 +20,13 @@ public abstract class GeneralPage {
     }
 
     public GeneralPage gotoPage(MenuItem menuItem) {
+        Utilities.click(By.xpath(String.format(genericTabLocatorString, menuItem.getHref())));
         return switch (menuItem) {
-            case HOME -> {
-                Utilities.click(tabHomeLocator);
-                yield new HomePage();
-            }
-            case FAQ -> {
-                Utilities.click(tabFaqLocator);
-                yield new FaqPage();
-            }
-            case BOOK_TICKET -> {
-                Utilities.click(tabBookTicketLocator);
-                yield new BookTicketPage();
-            }
-            case REGISTER -> {
-                Utilities.click(tabRegisterLocator);
-                yield new RegisterPage();
-            }
-            case LOGIN -> {
-                Utilities.click(tabLoginLocator);
-                yield new LoginPage();
-            }
+            case HOME -> new HomePage();
+            case FAQ -> new FaqPage();
+            case BOOK_TICKET -> new BookTicketPage();
+            case REGISTER -> new RegisterPage();
+            case LOGIN -> new LoginPage();
         };
     }
 
@@ -53,19 +35,7 @@ public abstract class GeneralPage {
         return new HomePage();
     }
 
-//    public By getTabLoginLocator() {
-//        return this.tabLoginLocator;
-//    }
-
     public By getTabLogoutLocator() {
         return this.tabLogoutLocator;
-    }
-
-//    public By getTabRegisterLocator() {
-//        return this.tabRegisterLocator;
-//    }
-
-    public By getLblWelcomeMessageLocator() {
-        return this.lblWelcomeMessageLocator;
     }
 }

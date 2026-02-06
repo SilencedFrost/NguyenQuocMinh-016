@@ -7,6 +7,7 @@ import DataObjects.Railway.UserAccount;
 import PageObjects.Railway.HomePage;
 import PageObjects.Railway.LoginPage;
 import PageObjects.Railway.RegisterPage;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -28,7 +29,7 @@ public class LoginTest extends BaseTest {
         log.info("3. Enter valid Email and Password");
         log.info("4. Click on \"Login\" button");
         HomePage homePage = loginPage.login(userAccount.getEmail(), userAccount.getPassword()).expectSuccess();
-        WaitUtils.waitForElementVisibility(homePage.getLblWelcomeMessageLocator());
+        WaitUtils.waitForPageLoad();
 
         log.info("User is logged into Railway. Welcome user message is displayed.");
         String actualMsg = homePage.getWelcomeMessage();

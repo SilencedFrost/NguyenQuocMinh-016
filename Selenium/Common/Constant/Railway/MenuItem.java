@@ -2,15 +2,19 @@ package Common.Constant.Railway;
 
 public enum MenuItem {
 
-    HOME("Home"),
-    FAQ("Faq"),
-    BOOK_TICKET("Book ticket"),
-    REGISTER("Register"),
-    LOGIN("Login");
+    HOME("../"),
+    FAQ("/Page/FAQ.cshtml"),
+    BOOK_TICKET("/Page/BookTicketPage.cshtml"),
+    REGISTER("/Account/Register.cshtml"),
+    LOGIN("/Account/Login.cshtml");
 
-    public final String menuName;
+    public final String href;
 
-    MenuItem(String menuName) {
-        this.menuName = menuName;
+    MenuItem(String href) {
+        this.href = href;
+    }
+
+    public String getHref() {
+        return this.href;
     }
 }
