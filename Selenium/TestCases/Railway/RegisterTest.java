@@ -1,6 +1,7 @@
 package TestCases.Railway;
 
 import Common.Common.Utilities;
+import Common.Common.WindowUtils;
 import Common.Constant.Constant;
 import Common.Constant.EmailDomain;
 import Common.Constant.Railway.MailTitle;
@@ -113,7 +114,7 @@ public class RegisterTest extends BaseTest{
         // Actions
         log.info("5. Get email information (webmail address, mailbox and password) and navigate to that webmail");
         Constant.WEBDRIVER.switchTo().newWindow(WindowType.TAB);
-        Utilities.closeFirstWindow();
+        WindowUtils.closeFirstWindow();
         InboxPage guerrillaInboxPage = new InboxPage().open();
 
         log.info("6. Login to the mailbox");
@@ -124,8 +125,8 @@ public class RegisterTest extends BaseTest{
 
         log.info("8. Click on the activate link");
         guerrillaInboxPage.clickLinkContains(Constant.RAILWAY_CONFIRM_REGISTRATION_URL);
-        Utilities.switchToLatestWindow();
-        Utilities.closeFirstWindow();
+        WindowUtils.switchToLatestWindow();
+        WindowUtils.closeFirstWindow();
 
         //Assertion
         log.info("Redirect to Railways page and message \"Registration Confirmed! You can now log in to the site\" is shown");

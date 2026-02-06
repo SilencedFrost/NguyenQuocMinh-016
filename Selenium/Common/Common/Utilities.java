@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Utilities {
@@ -58,64 +57,6 @@ public class Utilities {
 
     public static By scrollToElement(By locator) {
         return scrollToElement(locator, Constant.FIND_ELEMENT_TIMEOUT);
-    }
-
-    private static ArrayList<String> getTabs() {
-        return new ArrayList<>(Constant.WEBDRIVER.getWindowHandles());
-    }
-
-    public static void switchToLatestWindow() {
-        Constant.WEBDRIVER.switchTo().window(getTabs().getLast());
-    }
-
-    public static void switchToWindowIndex(int index) {
-        Constant.WEBDRIVER.switchTo().window(getTabs().get(index));
-    }
-
-    public static void switchToFirstWindow() {
-        switchToWindowIndex(0);
-    }
-
-    public static void closeLatestWindow() {
-        String currentHandle = Constant.WEBDRIVER.getWindowHandle();
-        String latestHandle = getTabs().getLast();
-
-        if (!latestHandle.equals(currentHandle)) {
-            Constant.WEBDRIVER.switchTo().window(latestHandle);
-            Constant.WEBDRIVER.close();
-            Constant.WEBDRIVER.switchTo().window(currentHandle);
-        } else {
-            Constant.WEBDRIVER.close();
-            switchToFirstWindow();
-        }
-    }
-
-    public static void closeWindowIndex(int index) {
-        String currentHandle = Constant.WEBDRIVER.getWindowHandle();
-        String targetHandle = getTabs().get(index);
-
-        if (!targetHandle.equals(currentHandle)) {
-            Constant.WEBDRIVER.switchTo().window(targetHandle);
-            Constant.WEBDRIVER.close();
-            Constant.WEBDRIVER.switchTo().window(currentHandle);
-        } else {
-            Constant.WEBDRIVER.close();
-            switchToFirstWindow();
-        }
-    }
-
-    public static void closeFirstWindow() {
-        String currentHandle = Constant.WEBDRIVER.getWindowHandle();
-        String firstHandle = getTabs().get(0);
-
-        if (!firstHandle.equals(currentHandle)) {
-            Constant.WEBDRIVER.switchTo().window(firstHandle);
-            Constant.WEBDRIVER.close();
-            Constant.WEBDRIVER.switchTo().window(currentHandle);
-        } else {
-            Constant.WEBDRIVER.close();
-            switchToWindowIndex(1); // Switch to second window if first was current
-        }
     }
 
     public static By selectComboboxByVisibleText(By locator, String visibleText, Duration timeout) {
