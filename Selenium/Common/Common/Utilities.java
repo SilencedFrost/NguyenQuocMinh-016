@@ -26,11 +26,15 @@ public class Utilities {
     // Find
     public static WebElement findElement(By locator) {
         WaitUtils.waitForPageLoad();
+        // Wait to prevent flaky scenarios
+        WaitUtils.waitForElementVisibility(locator);
         return Constant.WEBDRIVER.findElement(locator);
     }
 
     public static List<WebElement> findElements(By locator) {
         WaitUtils.waitForPageLoad();
+        // Wait to prevent flaky detections
+        WaitUtils.waitForElementVisibility(locator);
         return Constant.WEBDRIVER.findElements(locator);
     }
 
