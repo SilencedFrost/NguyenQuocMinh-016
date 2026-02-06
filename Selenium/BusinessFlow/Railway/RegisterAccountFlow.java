@@ -2,7 +2,7 @@ package BusinessFlow.Railway;
 
 import Common.Common.Utilities;
 import Common.Constant.Constant;
-import Common.Constant.MenuItem;
+import Common.Constant.Railway.MenuItem;
 import PageObjects.GuerrilaMail.InboxPage;
 import PageObjects.Railway.HomePage;
 import PageObjects.Railway.RegisterPage;

@@ -1,7 +1,7 @@
 package TestCases.Railway;
 
 import Common.Common.Utilities;
-import Common.Constant.MenuItem;
+import Common.Constant.Railway.MenuItem;
 import DataObjects.Railway.UserAccount;
 import PageObjects.Railway.FaqPage;
 import PageObjects.Railway.HomePage;

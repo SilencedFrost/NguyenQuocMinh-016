@@ -2,7 +2,7 @@ package TestCases.Railway;
 
 import Common.Common.RandomUtils;
 import Common.Common.WaitUtils;
-import Common.Constant.MenuItem;
+import Common.Constant.Railway.MenuItem;
 import DataObjects.Railway.UserAccount;
 import PageObjects.Railway.HomePage;
 import PageObjects.Railway.LoginPage;

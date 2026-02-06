@@ -1,7 +1,7 @@
 package PageObjects.Railway;
 
 import Common.Common.Utilities;
-import Common.Constant.MenuItem;
+import Common.Constant.Railway.MenuItem;
 import org.openqa.selenium.By;
 
 public abstract class GeneralPage {
@@ -9,6 +9,7 @@ public abstract class GeneralPage {
     // Locators
     private final By tabHomeLocator = By.xpath("//div[@id='menu']//a[@href='../']");
     private final By tabFaqLocator = By.xpath("//div[@id='menu']//a[@href='/Page/FAQ.cshtml']");
+    private final By tabBookTicketLocator = By.xpath("//div[@id='menu']//a[@href='/Page/BookTicketPage.cshtml']");
     private final By tabRegisterLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Register.cshtml']");
     private final By tabLoginLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Login.cshtml']");
     private final By tabLogoutLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Logout']");
@@ -31,6 +32,10 @@ public abstract class GeneralPage {
             case FAQ -> {
                 Utilities.click(tabFaqLocator);
                 yield new FaqPage();
+            }
+            case BOOK_TICKET -> {
+                Utilities.click(tabBookTicketLocator);
+                yield new BookTicketPage();
             }
             case REGISTER -> {
                 Utilities.click(tabRegisterLocator);

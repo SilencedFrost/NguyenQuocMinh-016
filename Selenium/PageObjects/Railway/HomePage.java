@@ -9,8 +9,6 @@ public class HomePage extends GeneralPage{
     // Locators
     private final By btnCreateAccountLocator = By.xpath("//div[@id='content']//a[@href='/Account/Register.cshtml']");
 
-    // Elements
-
     // Methods
     @Override
     public boolean isPageShown() {

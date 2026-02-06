@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -69,5 +70,17 @@ public class Utilities {
 
     public static void switchToFirstWindow() {
         switchToWindowIndex(0);
+    }
+
+    public static By selectComboboxByVisibleText(By locator, String visibleText, Duration timeout) {
+        WaitUtils.waitForElementVisibility(locator, timeout);
+        scrollToElement(locator, timeout);
+        WaitUtils.waitForElementClickable(locator, timeout);
+        new Select(findElement(locator)).selectByVisibleText(visibleText);
+        return locator;
+    }
+
+    public static By selectComboboxByVisibleText(By locator, String visibleText) {
+        return selectComboboxByVisibleText(locator, visibleText, Constant.FIND_ELEMENT_TIMEOUT);
     }
 }

@@ -4,8 +4,8 @@ import BusinessFlow.Railway.RegisterAccountFlow;
 import Common.Common.RandomUtils;
 import Common.Common.Utilities;
 import Common.Constant.Constant;
-import Common.Constant.EmailDomains;
-import Common.Constant.MenuItem;
+import Common.Constant.EmailDomain;
+import Common.Constant.Railway.MenuItem;
 import DataObjects.Railway.UserAccount;
 import PageObjects.GuerrilaMail.InboxPage;
 import PageObjects.Railway.ChangePasswordPage;
@@ -23,14 +23,7 @@ public class ResetPasswordTest extends BaseTest{
         log.info("TC10 - Reset password shows error if the new password is same as current");
 
         // Data
-        UserAccount userAccount = new UserAccount(
-                // Random guerrilla email address
-                RandomUtils.generateRandomString(15),
-                EmailDomains.GUERRILLA,
-                // Random password
-                RandomUtils.generateRandomPassword(),
-                // Random Pid
-                RandomUtils.generateRandomString(RandomUtils.NUMERICAL, 12));
+        UserAccount userAccount = new UserAccount().getRandomUser(EmailDomain.GUERRILLA);
         String mailTitle = "Please reset your password";
         String expectedMsg = "The new password cannot be the same with the current password";
 
@@ -83,14 +76,7 @@ public class ResetPasswordTest extends BaseTest{
         log.info("TC11 - Reset password shows error if the new password and confirm password doesn't match");
 
         // Data
-        UserAccount userAccount = new UserAccount(
-                // Random guerrilla email address
-                RandomUtils.generateRandomString(15),
-                EmailDomains.GUERRILLA,
-                // Random password
-                RandomUtils.generateRandomPassword(),
-                // Random Pid
-                RandomUtils.generateRandomString(RandomUtils.NUMERICAL, 12));
+        UserAccount userAccount = new UserAccount().getRandomUser(EmailDomain.GUERRILLA);
         String mailTitle = "Please reset your password";
         String expectedChangePasswordMsg = "Could not reset password. Please correct the errors and try again.";
         String expectedConfirmPasswordMsg = "The password confirmation did not match the new password.";

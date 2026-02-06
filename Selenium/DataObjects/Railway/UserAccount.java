@@ -1,11 +1,12 @@
 package DataObjects.Railway;
 
-import Common.Constant.EmailDomains;
+import Common.Common.RandomUtils;
+import Common.Constant.EmailDomain;
 
 public class UserAccount {
 
     private String username = "minhnguyenq2006";
-    private String domain = EmailDomains.GMAIL;
+    private String domain = EmailDomain.GMAIL;
     private String password = "DefaultP4$$";
     private String pid = "12345678";
 
@@ -23,7 +24,21 @@ public class UserAccount {
         this.pid = pid;
     }
 
+    /**
+     * Returns a UserAccount object with default information
+     */
     public UserAccount() {
+    }
+
+    /**
+     * @return a UserAccount object with randomized information
+     */
+    public UserAccount getRandomUser(String emailDomain) {
+        this.username = RandomUtils.generateRandomString(15);
+        this.domain = emailDomain;
+        this.password = RandomUtils.generateRandomPassword();
+        this.pid = RandomUtils.generateRandomString(RandomUtils.NUMERICAL, 12);
+        return this;
     }
 
     public String getEmail() {

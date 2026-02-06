@@ -1,10 +1,9 @@
 package TestCases.Railway;
 
-import Common.Common.RandomUtils;
 import Common.Common.Utilities;
 import Common.Constant.Constant;
-import Common.Constant.EmailDomains;
-import Common.Constant.MenuItem;
+import Common.Constant.EmailDomain;
+import Common.Constant.Railway.MenuItem;
 import DataObjects.Railway.UserAccount;
 import PageObjects.GuerrilaMail.InboxPage;
 import PageObjects.Railway.HomePage;
@@ -78,14 +77,7 @@ public class RegisterTest extends BaseTest{
         log.info("TC09 - User create and activate account");
 
         // Data
-        UserAccount userAccount = new UserAccount(
-                // Random guerrilla email address
-                RandomUtils.generateRandomString(15),
-                EmailDomains.GUERRILLA,
-                // Random password
-                RandomUtils.generateRandomPassword(),
-                // Random Pid
-                RandomUtils.generateRandomString(RandomUtils.NUMERICAL, 12));
+        UserAccount userAccount = new UserAccount().getRandomUser(EmailDomain.GUERRILLA);
         String mailTitle = "Please confirm your account";
         String expectedRegisterMsg = "Thank you for registering your account";
         String expectedConfirmationMsg = "Registration Confirmed! You can now log in to the site.";
