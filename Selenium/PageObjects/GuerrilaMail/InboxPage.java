@@ -2,7 +2,6 @@ package PageObjects.GuerrilaMail;
 
 import Common.Common.Utilities;
 import Common.Constant.Constant;
-import jdk.jshell.execution.Util;
 import org.openqa.selenium.By;
 
 import java.time.Duration;
@@ -12,6 +11,7 @@ public class InboxPage {
     private final By btnInboxIdLocator = By.xpath("//span[@id='inbox-id']");
     private final By btnSetInboxIdLocator = By.xpath("//span[@id='inbox-id']/button[contains(@class, 'save')]");
     private final String btnMailTitleLocatorString = "//tbody[@id='email_list']//td[contains(. ,'%s')]";
+    private final String btnMailLinkLocatorString = "//a[contains(., '%s')]";
 
     private final By txtInboxIdLocator = By.xpath("//span[@id='inbox-id']/input");
 
@@ -25,8 +25,13 @@ public class InboxPage {
 
     public InboxPage openMailTitle(String title) {
         By btnMailTitleLocator = By.xpath(String.format(btnMailTitleLocatorString, title));
-        Utilities.click(btnMailTitleLocator, Duration.ofSeconds(15));
+        Utilities.click(btnMailTitleLocator, Duration.ofSeconds(20));
         return this;
+    }
+
+    public void clickLinkContains(String link) {
+        By btnMailLink = By.xpath(String.format(btnMailLinkLocatorString, link));
+        Utilities.click(btnMailLink);
     }
 
     public InboxPage setMailUsername(String username) {

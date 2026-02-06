@@ -13,6 +13,8 @@ import org.openqa.selenium.WindowType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Set;
+
 public class RegisterTest extends BaseTest{
 
     @Test
@@ -73,20 +75,21 @@ public class RegisterTest extends BaseTest{
         Assert.assertEquals(actualPidErrorMsg.trim(), expectedPidErrorMsg.trim(), "Pid error message is not displayed as expected");
     }
 
-    // @Test
+    @Test
     public void TC09() {
         System.out.println("TC09 - User create and activate account");
 
         // Data
         UserAccount userAccount = new UserAccount(
                 // Random guerrilla email address
-                RandomUtils.generateRandomString(10),
+                RandomUtils.generateRandomString(15),
                 EmailDomains.GUERRILLA,
                 // Random password
                 RandomUtils.generateRandomPassword(),
                 // Random Pid
                 RandomUtils.generateRandomString(RandomUtils.NUMERICAL, 12));
-        String expectedMsg = "Thank you for registering your account";
+        String expectedRegisterMsg = "Thank you for registering your account";
+        String expectedConfirmationMsg = "Registration Confirmed! You can now log in to the site.";
 
         // Actions
         System.out.println("1. Navigate to QA Railway Website");
@@ -112,10 +115,10 @@ public class RegisterTest extends BaseTest{
         registerPage.register(userAccount.getEmail(), userAccount.getPassword(), userAccount.getPid());
 
         System.out.println("\"Thank you for registering your account\" is shown");
-        String actualMsg = registerPage.getTitle();
+        String actualRegisterMsg = registerPage.getTitle();
 
         // Assertion
-        Assert.assertEquals(actualMsg.trim(), expectedMsg.trim(), "Register message is not displayed as expected");
+        Assert.assertEquals(actualRegisterMsg.trim(), expectedRegisterMsg.trim(), "Register message is not displayed as expected");
 
         // Actions
         System.out.println("5. Get email information (webmail address, mailbox and password) and navigate to that webmail");
@@ -124,11 +127,18 @@ public class RegisterTest extends BaseTest{
 
         System.out.println("6. Login to the mailbox");
         guerrillaInboxPage.setMailUsername(userAccount.getUsername());
-        guerrillaInboxPage.openMailTitle("Please confirm your account");
 
         System.out.println("7. Open email with subject containing \"Please confirm your account\"  and the email of the new account at step 3");
-
+        guerrillaInboxPage.openMailTitle("Please confirm your account");
 
         System.out.println("8. Click on the activate link");
+        guerrillaInboxPage.clickLinkContains(Constant.RAILWAY_CONFIRM_URL);
+        Utilities.switchToLatestWindow();
+
+        System.out.println("Redirect to Railways page and message \"Registration Confirmed! You can now log in to the site\" is shown");
+        String actualConfirmationMsg = registerPage.getConfirmMsg();
+
+        //Assertion
+        Assert.assertEquals(actualConfirmationMsg.trim(), expectedConfirmationMsg.trim(), "Confirmation message is not displayed as expected");
     }
 }

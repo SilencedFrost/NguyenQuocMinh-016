@@ -5,9 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Wait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Utilities {
@@ -24,10 +24,12 @@ public class Utilities {
 
     // Find
     public static WebElement findElement(By locator) {
+        WaitUtils.waitForPageLoad();
         return Constant.WEBDRIVER.findElement(locator);
     }
 
     public static List<WebElement> findElements(By locator) {
+        WaitUtils.waitForPageLoad();
         return Constant.WEBDRIVER.findElements(locator);
     }
 
@@ -40,7 +42,7 @@ public class Utilities {
     }
 
     public static void click(By locator) {
-        click(locator, Constant.TIMEOUT);
+        click(locator, Constant.FIND_ELEMENT_TIMEOUT);
     }
 
     public static By scrollToElement(By locator, Duration timeout) {
@@ -50,6 +52,11 @@ public class Utilities {
     }
 
     public static By scrollToElement(By locator) {
-        return scrollToElement(locator, Constant.TIMEOUT);
+        return scrollToElement(locator, Constant.FIND_ELEMENT_TIMEOUT);
+    }
+
+    public static void switchToLatestWindow() {
+        ArrayList<String> tabs = new ArrayList<>(Constant.WEBDRIVER.getWindowHandles());
+        Constant.WEBDRIVER.switchTo().window(tabs.getLast());
     }
 }

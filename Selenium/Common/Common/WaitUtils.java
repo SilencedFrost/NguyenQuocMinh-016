@@ -19,7 +19,7 @@ public class WaitUtils {
     }
 
     public static By waitForElementVisibility(By locator) {
-        return waitForElementVisibility(locator, Constant.TIMEOUT);
+        return waitForElementVisibility(locator, Constant.FIND_ELEMENT_TIMEOUT);
     }
 
     public static By waitForElementClickable(By locator, Duration timeout) {
@@ -29,7 +29,7 @@ public class WaitUtils {
     }
 
     public static By waitForElementClickable(By locator) {
-        return waitForElementClickable(locator, Constant.TIMEOUT);
+        return waitForElementClickable(locator, Constant.FIND_ELEMENT_TIMEOUT);
     }
 
     public static void waitForPageLoad(Duration timeout) {
@@ -39,6 +39,6 @@ public class WaitUtils {
     }
 
     public static void waitForPageLoad() {
-        waitForPageLoad(Constant.TIMEOUT);
+        waitForPageLoad(Constant.PAGE_LOAD_TIMEOUT);
     }
 }

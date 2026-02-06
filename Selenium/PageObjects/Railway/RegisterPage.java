@@ -1,7 +1,6 @@
 package PageObjects.Railway;
 
 import Common.Common.Utilities;
-import Common.Common.WaitUtils;
 import org.openqa.selenium.By;
 
 public class RegisterPage extends GeneralPage {
@@ -16,6 +15,7 @@ public class RegisterPage extends GeneralPage {
     private final By lblPidErrorMsgLocator = By.xpath("//label[@for='pid' and @class='validation-error']");
     private final By lblRegisterErrorMsgLocator = By.xpath("//p[@class='message error']");
     private final By lblTitleLocator = By.xpath("//div[@id='content']/h1");
+    private final By lblConfirmMessageLocator = By.xpath("//div[@id='content']/p");
 
     private final By btnRegisterLocator = By.xpath("//input[@value='Register']");
 
@@ -38,8 +38,11 @@ public class RegisterPage extends GeneralPage {
     }
 
     public String getTitle() {
-        WaitUtils.waitForPageLoad();
         return Utilities.findElement(lblTitleLocator).getText();
+    }
+
+    public String getConfirmMsg() {
+        return Utilities.findElement(lblConfirmMessageLocator).getText();
     }
 
     public RegisterPage register(String email, String password, String confirmPassword, String pid) {
