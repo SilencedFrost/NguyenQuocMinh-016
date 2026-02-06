@@ -26,7 +26,7 @@ public class Utilities {
     public static WebElement findElement(By locator, Duration pageLoadTimeout, Duration elementTimeout) {
         WaitUtils.waitForPageLoad(pageLoadTimeout);
         // Wait to prevent flaky scenarios
-        WaitUtils.waitForElementPresence(locator, elementTimeout);
+        WaitUtils.waitForElementPresent(locator, elementTimeout);
         return Constant.WEBDRIVER.findElement(locator);
     }
 
@@ -41,7 +41,7 @@ public class Utilities {
     public static List<WebElement> findElements(By locator, Duration pageLoadTimeout, Duration elementTimeout) {
         WaitUtils.waitForPageLoad(pageLoadTimeout);
         // Wait to prevent flaky scenarios
-        WaitUtils.waitForElementPresence(locator, elementTimeout);
+        WaitUtils.waitForElementPresent(locator, elementTimeout);
         return Constant.WEBDRIVER.findElements(locator);
     }
 

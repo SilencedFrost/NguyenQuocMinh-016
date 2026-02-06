@@ -22,14 +22,14 @@ public class WaitUtils {
         return waitForElementVisible(locator, Constant.FIND_ELEMENT_TIMEOUT);
     }
 
-    public static By waitForElementPresence(By locator, Duration timeout) {
+    public static By waitForElementPresent(By locator, Duration timeout) {
         WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, timeout);
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         return locator;
     }
 
-    public static By waitForElementPresence(By locator) {
-        return waitForElementPresence(locator, Constant.FIND_ELEMENT_TIMEOUT);
+    public static By waitForElementPresent(By locator) {
+        return waitForElementPresent(locator, Constant.FIND_ELEMENT_TIMEOUT);
     }
 
     public static By waitForElementClickable(By locator, Duration timeout) {
