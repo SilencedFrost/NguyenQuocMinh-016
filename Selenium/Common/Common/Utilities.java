@@ -23,23 +23,39 @@ public class Utilities {
     }
 
     // Find
-    public static WebElement findElement(By locator) {
-        WaitUtils.waitForPageLoad();
+    public static WebElement findElement(By locator, Duration pageLoadTimeout, Duration elementTimeout) {
+        WaitUtils.waitForPageLoad(pageLoadTimeout);
         // Wait to prevent flaky scenarios
-        WaitUtils.waitForElementVisibility(locator);
+        WaitUtils.waitForElementPresence(locator, elementTimeout);
         return Constant.WEBDRIVER.findElement(locator);
     }
 
-    public static List<WebElement> findElements(By locator) {
-        WaitUtils.waitForPageLoad();
-        // Wait to prevent flaky detections
-        WaitUtils.waitForElementVisibility(locator);
+    public static WebElement findElement(By locator, Duration elementTimeout) {
+        return findElement(locator, Constant.PAGE_LOAD_TIMEOUT, elementTimeout);
+    }
+
+    public static WebElement findElement(By locator) {
+        return findElement(locator, Constant.FIND_ELEMENT_TIMEOUT);
+    }
+
+    public static List<WebElement> findElements(By locator, Duration pageLoadTimeout, Duration elementTimeout) {
+        WaitUtils.waitForPageLoad(pageLoadTimeout);
+        // Wait to prevent flaky scenarios
+        WaitUtils.waitForElementPresence(locator, elementTimeout);
         return Constant.WEBDRIVER.findElements(locator);
+    }
+
+    public static List<WebElement> findElements(By locator, Duration elementTimeout) {
+        return findElements(locator, Constant.PAGE_LOAD_TIMEOUT, elementTimeout);
+    }
+
+    public static List<WebElement> findElements(By locator) {
+        return findElements(locator, Constant.FIND_ELEMENT_TIMEOUT);
     }
 
     // Actions
     public static void click(By locator, Duration timeout){
-        WaitUtils.waitForElementVisibility(locator, timeout);
+        WaitUtils.waitForElementVisible(locator, timeout);
         scrollToElement(locator, timeout);
         WaitUtils.waitForElementClickable(locator, timeout);
         findElement(locator).click();
@@ -51,7 +67,7 @@ public class Utilities {
 
     public static By scrollToElement(By locator, Duration timeout) {
         JavascriptExecutor js = (JavascriptExecutor) Constant.WEBDRIVER;
-        js.executeScript("arguments[0].scrollIntoView({behavior: 'instant', block: 'center', inline: 'nearest'});", findElement(locator));
+        js.executeScript("arguments[0].scrollIntoView({behavior: 'instant', block: 'center', inline: 'nearest'});", findElement(locator, timeout));
         return locator;
     }
 
@@ -60,7 +76,7 @@ public class Utilities {
     }
 
     public static By selectComboboxByVisibleText(By locator, String visibleText, Duration timeout) {
-        WaitUtils.waitForElementVisibility(locator, timeout);
+        WaitUtils.waitForElementVisible(locator, timeout);
         scrollToElement(locator, timeout);
         WaitUtils.waitForElementClickable(locator, timeout);
         new Select(findElement(locator)).selectByVisibleText(visibleText);

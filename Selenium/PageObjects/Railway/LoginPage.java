@@ -43,7 +43,7 @@ public class LoginPage extends GeneralPage {
     }
 
     public LoginPage expectFailure() {
-        WaitUtils.waitForElementVisibility(lblLoginErrorMsgLocator);
+        WaitUtils.waitForElementVisible(lblLoginErrorMsgLocator);
         return this;
     }
 

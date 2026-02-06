@@ -12,14 +12,24 @@ import java.util.Objects;
 public class WaitUtils {
 
     // Waits
-    public static By waitForElementVisibility(By locator, Duration timeout) {
+    public static By waitForElementVisible(By locator, Duration timeout) {
         WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, timeout);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return locator;
     }
 
-    public static By waitForElementVisibility(By locator) {
-        return waitForElementVisibility(locator, Constant.FIND_ELEMENT_TIMEOUT);
+    public static By waitForElementVisible(By locator) {
+        return waitForElementVisible(locator, Constant.FIND_ELEMENT_TIMEOUT);
+    }
+
+    public static By waitForElementPresence(By locator, Duration timeout) {
+        WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, timeout);
+        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        return locator;
+    }
+
+    public static By waitForElementPresence(By locator) {
+        return waitForElementPresence(locator, Constant.FIND_ELEMENT_TIMEOUT);
     }
 
     public static By waitForElementClickable(By locator, Duration timeout) {
