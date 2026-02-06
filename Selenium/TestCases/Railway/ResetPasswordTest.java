@@ -5,6 +5,7 @@ import Common.Common.RandomUtils;
 import Common.Common.Utilities;
 import Common.Constant.Constant;
 import Common.Constant.EmailDomain;
+import Common.Constant.Railway.MailTitle;
 import Common.Constant.Railway.MenuItem;
 import DataObjects.Railway.UserAccount;
 import PageObjects.GuerrilaMail.InboxPage;
@@ -24,7 +25,6 @@ public class ResetPasswordTest extends BaseTest{
 
         // Data
         UserAccount userAccount = new UserAccount().getRandomUser(EmailDomain.GUERRILLA);
-        String mailTitle = "Please reset your password";
         String expectedMsg = "The new password cannot be the same with the current password";
 
         log.info("Pre-condition: an activated account is existing");
@@ -47,7 +47,7 @@ public class ResetPasswordTest extends BaseTest{
         InboxPage guerrillaInboxPage = new InboxPage().open().setMailUsername(userAccount.getUsername());
 
         log.info("6. Open email with subject containing \"Please reset your password\" and the email of the account at step 3");
-        guerrillaInboxPage.openMailTitle(mailTitle);
+        guerrillaInboxPage.openMailTitle(MailTitle.RESET_PASSWORD);
 
         log.info("7. Click on reset link");
         guerrillaInboxPage.clickLinkContains(Constant.RAILWAY_RESET_PASSWORD_URL);
@@ -79,7 +79,6 @@ public class ResetPasswordTest extends BaseTest{
 
         // Data
         UserAccount userAccount = new UserAccount().getRandomUser(EmailDomain.GUERRILLA);
-        String mailTitle = "Please reset your password";
         String expectedChangePasswordMsg = "Could not reset password. Please correct the errors and try again.";
         String expectedConfirmPasswordMsg = "The password confirmation did not match the new password.";
 
@@ -103,7 +102,7 @@ public class ResetPasswordTest extends BaseTest{
         InboxPage guerrillaInboxPage = new InboxPage().open().setMailUsername(userAccount.getUsername());
 
         log.info("6. Open email with subject containing \"Please reset your password\" and the email of the account at step 3");
-        guerrillaInboxPage.openMailTitle(mailTitle);
+        guerrillaInboxPage.openMailTitle(MailTitle.RESET_PASSWORD);
 
         log.info("7. Click on reset link");
         guerrillaInboxPage.clickLinkContains(Constant.RAILWAY_RESET_PASSWORD_URL);

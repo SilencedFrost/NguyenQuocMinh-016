@@ -2,6 +2,7 @@ package BusinessFlow.Railway;
 
 import Common.Common.Utilities;
 import Common.Constant.Constant;
+import Common.Constant.Railway.MailTitle;
 import Common.Constant.Railway.MenuItem;
 import PageObjects.GuerrilaMail.InboxPage;
 import PageObjects.Railway.HomePage;
@@ -26,7 +27,7 @@ public class RegisterAccountFlow {
         Utilities.closeFirstWindow();
         new InboxPage().open()
                 .setMailUsername(username)
-                .openMailTitle("Please confirm your account")
+                .openMailTitle(MailTitle.CONFIRM_ACCOUNT)
                 .clickLinkContains(Constant.RAILWAY_CONFIRM_REGISTRATION_URL);
         // Focus on confirmation tab
         Utilities.switchToLatestWindow();

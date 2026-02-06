@@ -3,6 +3,7 @@ package TestCases.Railway;
 import Common.Common.Utilities;
 import Common.Constant.Constant;
 import Common.Constant.EmailDomain;
+import Common.Constant.Railway.MailTitle;
 import Common.Constant.Railway.MenuItem;
 import DataObjects.Railway.UserAccount;
 import PageObjects.GuerrilaMail.InboxPage;
@@ -78,7 +79,6 @@ public class RegisterTest extends BaseTest{
 
         // Data
         UserAccount userAccount = new UserAccount().getRandomUser(EmailDomain.GUERRILLA);
-        String mailTitle = "Please confirm your account";
         String expectedRegisterMsg = "Thank you for registering your account";
         String expectedConfirmationMsg = "Registration Confirmed! You can now log in to the site.";
 
@@ -120,7 +120,7 @@ public class RegisterTest extends BaseTest{
         guerrillaInboxPage.setMailUsername(userAccount.getUsername());
 
         log.info("7. Open email with subject containing \"Please confirm your account\"  and the email of the new account at step 3");
-        guerrillaInboxPage.openMailTitle(mailTitle);
+        guerrillaInboxPage.openMailTitle(MailTitle.CONFIRM_ACCOUNT);
 
         log.info("8. Click on the activate link");
         guerrillaInboxPage.clickLinkContains(Constant.RAILWAY_CONFIRM_REGISTRATION_URL);
