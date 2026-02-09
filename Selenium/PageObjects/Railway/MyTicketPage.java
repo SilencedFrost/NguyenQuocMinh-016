@@ -22,27 +22,32 @@ public class MyTicketPage extends GeneralPage{
         return Utilities.isElementPresent(By.xpath("//div[@id='menu']//a[@href='/Page/ManageTicket.cshtml']/parent::li[@class='selected']"));
     }
 
-    public MyTicketPage deleteTicketWhereDepartAndArriveLocationIs(Location departLocation, Location arriveLocation) {
+    // Build an XPath selector for table rows matching the specified departure and arrival locations
+    private String buildRowXpathForDepartureAndArrival(Location departLocation, Location arriveLocation) {
+        // XPath predicate (selector) for value from depart location column
         String departLocationXpathFragment = String.format(tblRowSelectorByHeaderAndValueOptionXpath, TimetableHeader.DEPART_STATION.getText(), departLocation.getText());
+        // XPath predicate (selector) for value from arrival location column
         String arriveLocationXpathFragment = String.format(tblRowSelectorByHeaderAndValueOptionXpath, TimetableHeader.ARRIVE_STATION.getText(), arriveLocation.getText());
 
-        String fullXpath = tblMyTicketXpath + rowXpath + departLocationXpathFragment + arriveLocationXpathFragment + btnDeleteXpath;
+        return tblMyTicketXpath + rowXpath + departLocationXpathFragment + arriveLocationXpathFragment;
+    }
 
+    public MyTicketPage deleteTicketForRoute(Location departLocation, Location arriveLocation) {
+        String fullXpath = buildRowXpathForDepartureAndArrival(departLocation, arriveLocation) + btnDeleteXpath;
+
+        // Click delete
         Utilities.click(By.xpath(fullXpath));
 
+        // Process alert
         WaitUtils.waitForAlertPresent();
-
         Alert alert = Constant.WEBDRIVER.switchTo().alert();
         alert.accept();
 
         return this;
     }
 
-    public boolean isRowWhereDepartAndLocationIsPresent(Location departLocation, Location arriveLocation) {
-        String departLocationXpathFragment = String.format(tblRowSelectorByHeaderAndValueOptionXpath, TimetableHeader.DEPART_STATION.getText(), departLocation.getText());
-        String arriveLocationXpathFragment = String.format(tblRowSelectorByHeaderAndValueOptionXpath, TimetableHeader.ARRIVE_STATION.getText(), arriveLocation.getText());
-
-        String fullXpath = tblMyTicketXpath + rowXpath + departLocationXpathFragment + arriveLocationXpathFragment;
+    public boolean isRowForRoutePresent(Location departLocation, Location arriveLocation) {
+        String fullXpath = buildRowXpathForDepartureAndArrival(departLocation, arriveLocation);
 
         return Utilities.isElementPresent(By.xpath(fullXpath));
     }

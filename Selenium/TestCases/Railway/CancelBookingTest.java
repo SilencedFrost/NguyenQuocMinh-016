@@ -39,9 +39,9 @@ public class CancelBookingTest extends BaseTest{
 
         log.info("5. Click on \"Cancel\" button of ticket which user want to cancel.");
         log.info("6. Click on \"OK\" button on Confirmation message \"Are you sure?\"");
-        myTicketPage.deleteTicketWhereDepartAndArriveLocationIs(ticketInformation.getDepartLocation(), ticketInformation.getArriveLocation());
+        myTicketPage.deleteTicketForRoute(ticketInformation.getDepartLocation(), ticketInformation.getArriveLocation());
 
         log.info("The canceled ticket is disappeared.");
-        Assert.assertFalse(myTicketPage.isRowWhereDepartAndLocationIsPresent(ticketInformation.getDepartLocation(), ticketInformation.getArriveLocation()), "Deleted ticket is still present");
+        Assert.assertFalse(myTicketPage.isRowForRoutePresent(ticketInformation.getDepartLocation(), ticketInformation.getArriveLocation()), "Deleted ticket is still present");
     }
 }
