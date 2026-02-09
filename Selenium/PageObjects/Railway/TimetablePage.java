@@ -45,5 +45,4 @@ public class TimetablePage extends GeneralPage{
 
         return new BookTicketPage();
     }
-
 }
