@@ -8,6 +8,7 @@ import Common.Constant.Railway.SeatType;
 import Common.Constant.Railway.TicketHeader;
 import DataObjects.Railway.TicketInformation;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.LocalDate;
@@ -98,8 +99,9 @@ public class BookTicketPage extends GeneralPage{
         if(departLocation != null){
             String currentDepartLocation = this.getDepartLocation();
             if(!currentDepartLocation.equals(departLocation.getText())) {
+                WebElement cboArriveLocation = Utilities.findElement(cboArriveLocationLocator);
                 selectDepartLocation(departLocation);
-                WaitUtils.waitForElementStale(cboArriveLocationLocator);
+                WaitUtils.waitForElementStale(cboArriveLocation);
             }
         }
         if(arriveLocation != null) selectArriveLocation(arriveLocation);
