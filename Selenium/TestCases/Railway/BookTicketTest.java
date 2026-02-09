@@ -72,4 +72,59 @@ public class BookTicketTest extends BaseTest{
         Assert.assertEquals(actualSeatType, ticketInformation.getSeatType().getVisibleText());
         Assert.assertEquals(actualAmount, ticketInformation.getTicketAmount().toString());
     }
+
+    @Test
+    public void TC13() {
+        log.info("TC13 - User can book many tickets at a time");
+
+        // Data
+        UserAccount userAccount = new UserAccount().getRandomUser(EmailDomain.GUERRILLA);
+        TicketInformation ticketInformation = new TicketInformation(null, Location.NHA_TRANG, Location.SAIGON, SeatType.SOFT_SEAT_AC, 5);
+        int nextDays = 25;
+        String expectedMsg = "Ticket booked successfully!";
+
+        // Actions
+        log.info("Pre-condition: an activated account is existing");
+        log.info("1. Navigate to QA Railway Website");
+        RegisterPage registerPage = RegisterAccountFlow.registerAndActivate(userAccount.getUsername(), userAccount.getEmail(), userAccount.getPassword(), userAccount.getPid());
+
+        log.info("2. Login with a valid account");
+        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword()).expectSuccess();
+
+        log.info("3. Click on \"Book ticket\" tab");
+        BookTicketPage bookTicketPage = (BookTicketPage) homePage.gotoPage(MenuItem.BOOK_TICKET);
+
+        log.info("4. Select the next 25 days from \"Depart date\"");
+        ticketInformation.setDepartDate(bookTicketPage.getDepartDate().plusDays(nextDays));
+
+        log.info("5. Select \"Nha Trang\" for \"Depart from\" and \"Sài Gòn\" for \"Arrive at\".");
+        log.info("6. Select \"Soft seat with air conditioner\" for \"Seat type\"");
+        log.info("7. Select \"5\" for \"Ticket amount\"\n");
+        log.info("8. Click on \"Book ticket\" button");
+        bookTicketPage.bookTicket(
+                ticketInformation.getDepartDate(),
+                ticketInformation.getDepartLocation(),
+                ticketInformation.getArriveLocation(),
+                ticketInformation.getSeatType(),
+                ticketInformation.getTicketAmount());
+
+        // Assertions
+        log.info("Message \"Ticket booked successfully!\" displays.");
+        String actualMsg = bookTicketPage.getTitle();
+
+        Assert.assertEquals(actualMsg.trim(), expectedMsg.trim(), "Error message is not displayed as expected");
+
+        log.info("Ticket information display correctly (Depart Date,  Depart Station,  Arrive Station,  Seat Type,  Amount)");
+        String actualDepartDate = bookTicketPage.getCellValue(TicketHeader.DEPART_DATE);
+        String actualDepartStation = bookTicketPage.getCellValue(TicketHeader.DEPART_STATION);
+        String actualArriveStation = bookTicketPage.getCellValue(TicketHeader.ARRIVE_STATION);
+        String actualSeatType = bookTicketPage.getCellValue(TicketHeader.SEAT_TYPE);
+        String actualAmount = bookTicketPage.getCellValue(TicketHeader.AMOUNT);
+
+        Assert.assertEquals(actualDepartDate, ticketInformation.getDepartDate().format(Constant.DATE_FORMAT));
+        Assert.assertEquals(actualDepartStation, ticketInformation.getDepartLocation().getVisibleText());
+        Assert.assertEquals(actualArriveStation, ticketInformation.getArriveLocation().getVisibleText());
+        Assert.assertEquals(actualSeatType, ticketInformation.getSeatType().getVisibleText());
+        Assert.assertEquals(actualAmount, ticketInformation.getTicketAmount().toString());
+    }
 }
