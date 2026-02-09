@@ -9,7 +9,7 @@ public enum Location {
     HUE("Huế"),
     QUANG_NGAI("Quảng Ngãi");
 
-    public final String visibleText;
+    private final String visibleText;
 
     Location(String visibleText) {
         this.visibleText = visibleText;

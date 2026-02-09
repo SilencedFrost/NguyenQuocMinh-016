@@ -24,7 +24,7 @@ public class BookTicketPage extends GeneralPage{
 
     private final By lblTitleLocator = By.xpath("//div[@id='content']/h1");
 
-    private final String tblCellByHeaderLocatorString = "//tr/td[position() = count(//th[.='%s']/preceding-sibling::th) + 1]";
+    private static final String tblCellByHeaderLocatorString = "//tr/td[position() = count(//th[.='%s']/preceding-sibling::th) + 1]";
 
     // Methods
     @Override
@@ -60,7 +60,7 @@ public class BookTicketPage extends GeneralPage{
     }
 
     public BookTicketPage selectSeatType(SeatType seatType) {
-        Utilities.selectComboboxByVisibleText(cboSeatTypeLocator, seatType.getVisibleText());
+        Utilities.selectComboboxByVisibleText(cboSeatTypeLocator, seatType.getText());
         return this;
     }
 

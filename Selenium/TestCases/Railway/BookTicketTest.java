@@ -7,12 +7,10 @@ import Common.Constant.Railway.Location;
 import Common.Constant.Railway.MenuItem;
 import Common.Constant.Railway.SeatType;
 import Common.Constant.Railway.TicketHeader;
+import DataObjects.Railway.TicketPriceInformation;
 import DataObjects.Railway.TicketInformation;
 import DataObjects.Railway.UserAccount;
-import PageObjects.Railway.BookTicketPage;
-import PageObjects.Railway.HomePage;
-import PageObjects.Railway.LoginPage;
-import PageObjects.Railway.RegisterPage;
+import PageObjects.Railway.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -69,7 +67,7 @@ public class BookTicketTest extends BaseTest{
         Assert.assertEquals(actualDepartDate, ticketInformation.getDepartDate().format(Constant.DATE_FORMAT));
         Assert.assertEquals(actualDepartStation, ticketInformation.getDepartLocation().getVisibleText());
         Assert.assertEquals(actualArriveStation, ticketInformation.getArriveLocation().getVisibleText());
-        Assert.assertEquals(actualSeatType, ticketInformation.getSeatType().getVisibleText());
+        Assert.assertEquals(actualSeatType, ticketInformation.getSeatType().getText());
         Assert.assertEquals(actualAmount, ticketInformation.getTicketAmount().toString());
     }
 
@@ -121,10 +119,57 @@ public class BookTicketTest extends BaseTest{
         String actualSeatType = bookTicketPage.getCellValue(TicketHeader.SEAT_TYPE);
         String actualAmount = bookTicketPage.getCellValue(TicketHeader.AMOUNT);
 
-        Assert.assertEquals(actualDepartDate, ticketInformation.getDepartDate().format(Constant.DATE_FORMAT));
-        Assert.assertEquals(actualDepartStation, ticketInformation.getDepartLocation().getVisibleText());
-        Assert.assertEquals(actualArriveStation, ticketInformation.getArriveLocation().getVisibleText());
-        Assert.assertEquals(actualSeatType, ticketInformation.getSeatType().getVisibleText());
-        Assert.assertEquals(actualAmount, ticketInformation.getTicketAmount().toString());
+        Assert.assertEquals(actualDepartDate, ticketInformation.getDepartDate().format(Constant.DATE_FORMAT), "Actual depart date is not displayed as expected");
+        Assert.assertEquals(actualDepartStation, ticketInformation.getDepartLocation().getVisibleText(), "Actual depart station is not displayed as expected");
+        Assert.assertEquals(actualArriveStation, ticketInformation.getArriveLocation().getVisibleText(), "Actual arrival station is not displayed as expected");
+        Assert.assertEquals(actualSeatType, ticketInformation.getSeatType().getText(), "Actual seat type is not displayed as expected");
+        Assert.assertEquals(actualAmount, ticketInformation.getTicketAmount().toString(), "Actual ticket amount is not displayed as expected");
+    }
+
+    @Test
+    public void TC14() {
+        log.info("TC14 - User can check price of ticket from Timetable");
+
+        // Data
+        UserAccount userAccount = new UserAccount().getRandomUser(EmailDomain.GUERRILLA);
+        TicketPriceInformation ticketPriceInformation = new TicketPriceInformation(Location.DA_NANG, Location.SAIGON, "Ticket price from Đà Nẵng to Sài Gòn", 310000, 335000, 360000, 410000, 460000, 510000);
+
+        // Actions
+        log.info("Pre-condition: an activated account is existing");
+        log.info("1. Navigate to QA Railway Website");
+        RegisterPage registerPage = RegisterAccountFlow.registerAndActivate(userAccount.getUsername(), userAccount.getEmail(), userAccount.getPassword(), userAccount.getPid());
+
+        log.info("2. Login with a valid account");
+        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword()).expectSuccess();
+
+        log.info("3. Click on \"Timetable\" tab");
+        TimetablePage timetablePage = (TimetablePage) homePage.gotoPage(MenuItem.TIMETABLE);
+
+        log.info("4. Click on \"check price\" link of the route from \"Đà Nẵng\" to \"Sài Gòn\"");
+        TicketPricePage ticketPricePage = timetablePage.checkPriceWhereDepartAndArriveLocationIs(ticketPriceInformation.getDepartLocation(), ticketPriceInformation.getArriveLocation());
+
+        // Assertions
+        log.info("\"Ticket Price\" page is loaded.\"Ticket Price\" page is loaded.");
+        Assert.assertTrue(ticketPricePage.isPageShown(), "Ticket price page is not displayed as expected");
+
+        log.info("Ticket table shows \"Ticket price from Đà Nẵng to Sài Gòn\".");
+        String actualTableTitle = ticketPricePage.getTableHeader();
+
+        Assert.assertEquals(actualTableTitle, ticketPriceInformation.getTitle(), "Ticket table title is not displayed as expected");
+
+        log.info("Price for each seat displays correctly: HS = 310000, SS = 335000, SSC = 360000, HB = 410000, SB = 460000, SBC = 510000");
+        String actualHSPrice = ticketPricePage.getSeatPrice(SeatType.HARD_SEAT);
+        String actualSSPrice = ticketPricePage.getSeatPrice(SeatType.SOFT_SEAT);
+        String actualSSCPrice = ticketPricePage.getSeatPrice(SeatType.SOFT_SEAT_AC);
+        String actualHBPrice = ticketPricePage.getSeatPrice(SeatType.HARD_BED);
+        String actualSBPrice = ticketPricePage.getSeatPrice(SeatType.SOFT_BED);
+        String actualSBCPrice = ticketPricePage.getSeatPrice(SeatType.SOFT_BED_AC);
+
+        Assert.assertEquals(actualHSPrice, ticketPriceInformation.getExpectedHSPrice().toString(), "Ticket price is not displayed as expected");
+        Assert.assertEquals(actualSSPrice, ticketPriceInformation.getExpectedSSPrice().toString(), "Ticket price is not displayed as expected");
+        Assert.assertEquals(actualSSCPrice, ticketPriceInformation.getExpectedSSCPrice().toString(), "Ticket price is not displayed as expected");
+        Assert.assertEquals(actualHBPrice, ticketPriceInformation.getExpectedHBPrice().toString(), "Ticket price is not displayed as expected");
+        Assert.assertEquals(actualSBPrice, ticketPriceInformation.getExpectedSBPrice().toString(), "Ticket price is not displayed as expected");
+        Assert.assertEquals(actualSBCPrice, ticketPriceInformation.getExpectedSBCPrice().toString(), "Ticket price is not displayed as expected");
     }
 }

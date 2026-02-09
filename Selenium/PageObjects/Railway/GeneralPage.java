@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 public abstract class GeneralPage {
 
     // Locators
-    private final String genericTabLocatorString = "//div[@id='menu']//a[@href='%s']";
+    private static final String genericTabLocatorString = "//div[@id='menu']//a[@href='%s']";
     private final By tabLogoutLocator = By.xpath("//div[@id='menu']//a[@href='/Account/Logout']");
 
     private final By lblWelcomeMessageLocator = By.xpath("//div[@class='account']/strong");
@@ -24,6 +24,8 @@ public abstract class GeneralPage {
         return switch (menuItem) {
             case HOME -> new HomePage();
             case FAQ -> new FaqPage();
+            case TIMETABLE -> new TimetablePage();
+            case TICKET_PRICE -> new TicketPricePage();
             case BOOK_TICKET -> new BookTicketPage();
             case REGISTER -> new RegisterPage();
             case LOGIN -> new LoginPage();
