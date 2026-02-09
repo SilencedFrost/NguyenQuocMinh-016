@@ -58,30 +58,6 @@ public class RegisterPage extends GeneralPage {
     public RegisterPage register(String email, String password, String pid) {
         return this.register(email, password, password, pid);
     }
-
-//    public By getTxtUsernameLocator() {
-//        return this.txtUsernameLocator;
-//    }
-//
-//    public By getTxtPasswordLocator() {
-//        return this.txtPasswordLocator;
-//    }
-//
-//    public By getTxtConfirmPasswordLocator() {
-//        return this.txtConfirmPasswordLocator;
-//    }
-//
-//    public By getTxtPidLocator() {
-//        return this.txtPidLocator;
-//    }
-//
-//    public By getBtnRegisterLocator() {
-//        return this.btnRegisterLocator;
-//    }
-//
-//    public By getLblRegisterErrorMsgLocator() {
-//        return this.lblRegisterErrorMsgLocator;
-//    }
 }
 
 
