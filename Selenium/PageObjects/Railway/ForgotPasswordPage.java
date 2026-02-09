@@ -10,8 +10,6 @@ public class ForgotPasswordPage extends GeneralPage{
 
     private final By btnSubmit = By.xpath("//form//input[@type='submit']");
 
-    // Elements
-
     // Methods
     @Override
     public boolean isPageShown() {
