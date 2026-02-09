@@ -21,7 +21,7 @@ public class LogoutTest extends BaseTest{
         // Actions
         log.info("1. Navigate to QA Railway Website");
         log.info("2. Login with valid Email and Password");
-        HomePage homePage = ((LoginPage) new HomePage().open().gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword()).expectSuccess();
+        HomePage homePage = ((LoginPage) new HomePage().open().gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword());
 
         log.info("3. Click on \"FAQ\" tab");
         FaqPage faqPage = (FaqPage) homePage.gotoPage(MenuItem.FAQ);

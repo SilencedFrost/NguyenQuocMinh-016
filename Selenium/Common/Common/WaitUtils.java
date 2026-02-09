@@ -53,6 +53,15 @@ public class WaitUtils {
         return waitForElementStale(locator, Constant.FIND_ELEMENT_TIMEOUT);
     }
 
+    public static void waitForElementStale(WebElement webElement, Duration timeout) {
+        WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, timeout);
+        wait.until(ExpectedConditions.stalenessOf(webElement));
+    }
+
+    public static void waitForElementStale(WebElement webElement) {
+        waitForElementStale(webElement, Constant.FIND_ELEMENT_TIMEOUT);
+    }
+
     public static void waitForPageLoad(Duration timeout) {
         WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, timeout);
         wait.until(webDriver -> Objects.equals(((JavascriptExecutor) webDriver)

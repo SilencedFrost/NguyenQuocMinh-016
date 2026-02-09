@@ -32,7 +32,7 @@ public class BookTicketTest extends BaseTest{
         RegisterPage registerPage = RegisterAccountFlow.registerAndActivate(userAccount.getUsername(), userAccount.getEmail(), userAccount.getPassword(), userAccount.getPid());
 
         log.info("2. Login with a valid account");
-        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword()).expectSuccess();
+        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword());
 
         log.info("3. Click on \"Book ticket\" tab");
         BookTicketPage bookTicketPage = (BookTicketPage) homePage.gotoPage(MenuItem.BOOK_TICKET);
@@ -87,7 +87,7 @@ public class BookTicketTest extends BaseTest{
         RegisterPage registerPage = RegisterAccountFlow.registerAndActivate(userAccount.getUsername(), userAccount.getEmail(), userAccount.getPassword(), userAccount.getPid());
 
         log.info("2. Login with a valid account");
-        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword()).expectSuccess();
+        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword());
 
         log.info("3. Click on \"Book ticket\" tab");
         BookTicketPage bookTicketPage = (BookTicketPage) homePage.gotoPage(MenuItem.BOOK_TICKET);
@@ -140,7 +140,7 @@ public class BookTicketTest extends BaseTest{
         RegisterPage registerPage = RegisterAccountFlow.registerAndActivate(userAccount.getUsername(), userAccount.getEmail(), userAccount.getPassword(), userAccount.getPid());
 
         log.info("2. Login with a valid account");
-        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword()).expectSuccess();
+        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword());
 
         log.info("3. Click on \"Timetable\" tab");
         TimetablePage timetablePage = (TimetablePage) homePage.gotoPage(MenuItem.TIMETABLE);

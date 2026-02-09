@@ -3,6 +3,7 @@ package PageObjects.Railway;
 import Common.Common.Utilities;
 import Common.Common.WaitUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class LoginPage extends GeneralPage {
 
@@ -30,12 +31,20 @@ public class LoginPage extends GeneralPage {
         return Utilities.findElement(lblLoginErrorMsgLocator).getText();
     }
 
-    public LoginPage login(String email, String password) {
+    public <T extends GeneralPage> T login(String email, String password) {
         Utilities.findElement(txtEmailLocator).sendKeys(email);
         Utilities.findElement(txtPasswordLocator).sendKeys(password);
 
+        WebElement btnLogin = Utilities.findElement(btnLoginLocator);
         Utilities.click(btnLoginLocator);
-        return this;
+
+        // Wait for form processing
+        WaitUtils.waitForElementStale(btnLogin);
+        if(this.isPageShown()) {
+            return (T) this;
+        } else {
+            return (T) new HomePage();
+        }
     }
 
     public HomePage expectSuccess() {
@@ -46,22 +55,6 @@ public class LoginPage extends GeneralPage {
         WaitUtils.waitForElementVisible(lblLoginErrorMsgLocator);
         return this;
     }
-
-//    public By getTxtEmailLocator() {
-//        return this.txtEmailLocator;
-//    }
-//
-//    public By getTxtPasswordLocator() {
-//        return this.txtPasswordLocator;
-//    }
-//
-//    public By getBtnLoginLocator() {
-//        return this.btnLoginLocator;
-//    }
-//
-//    public By getLblLoginErrorMsgLocator() {
-//        return this.lblLoginErrorMsgLocator;
-//    }
 }
 
 
