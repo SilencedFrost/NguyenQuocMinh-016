@@ -20,28 +20,27 @@ public class TimetablePage extends GeneralPage{
         return Utilities.isElementPresent(By.xpath("//div[@id='menu']//a[@href='TrainTimeListPage.cshtml']/parent::li[@class='selected']"));
     }
 
-    private String getTableRowXpathWhereDepartAndArriveLocationIs(Location departLocation, Location arriveLocation) {
+    // Build an XPath selector for table rows matching the specified departure and arrival locations
+    private String buildRowXpathForDepartureAndArrival(Location departLocation, Location arriveLocation) {
+        // XPath predicate (selector) for value from depart location column
         String departLocationXpathFragment = String.format(tblRowSelectorByHeaderAndValueOptionXpath, TimetableHeader.DEPART_STATION.getText(), departLocation.getText());
+        // XPath predicate (selector) for value from arrival location column
         String arriveLocationXpathFragment = String.format(tblRowSelectorByHeaderAndValueOptionXpath, TimetableHeader.ARRIVE_STATION.getText(), arriveLocation.getText());
 
         return tblTimetableXpath + rowXpath + departLocationXpathFragment + arriveLocationXpathFragment;
     }
 
-    public TicketPricePage checkPriceWhereDepartAndArriveLocationIs(Location departLocation, Location arriveLocation) {
+    public TicketPricePage checkPriceForRoute(Location departLocation, Location arriveLocation) {
         String btnXpath = String.format(btnOptionXpath, TimetableFeature.CHECK_PRICE.getUrl());
-
-        String fullXPath = getTableRowXpathWhereDepartAndArriveLocationIs(departLocation, arriveLocation) + btnXpath;
-
+        String fullXPath = buildRowXpathForDepartureAndArrival(departLocation, arriveLocation) + btnXpath;
         Utilities.click(By.xpath(fullXPath));
 
         return new TicketPricePage();
     }
 
-    public BookTicketPage bookTicketWhereDepartAndArriveLocationIs(Location departLocation, Location arriveLocation) {
+    public BookTicketPage bookTicketForRoute(Location departLocation, Location arriveLocation) {
         String btnXpath = String.format(btnOptionXpath, TimetableFeature.BOOK_TICKET.getUrl());
-
-        String fullXPath = getTableRowXpathWhereDepartAndArriveLocationIs(departLocation, arriveLocation) + btnXpath;
-
+        String fullXPath = buildRowXpathForDepartureAndArrival(departLocation, arriveLocation) + btnXpath;
         Utilities.click(By.xpath(fullXPath));
 
         return new BookTicketPage();
