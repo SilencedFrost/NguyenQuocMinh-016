@@ -26,19 +26,12 @@ public class RandomUtils {
         return result.toString();
     }
 
-    /**
-     * Returns random string with set length, contains only alphanumeric
-     * @param length length of generated string
-     * @return random string
-     */
+     // Returns random string with set length, contains only alphanumeric
     public static String generateRandomString(Integer length) {
         return generateRandomString(RandomUtils.LOWERCASE_ALPHA + RandomUtils.UPPERCASE_ALPHA + RandomUtils.NUMERICAL, length);
     }
 
-    /**
-     * Returns password containing: uppercase letter, lowercase letter, numbers, and special characters that is 14 characters long
-     * @return random password
-     */
+    // Returns password containing: uppercase letter, lowercase letter, numbers, and special characters that is 14 characters long
     public static String generateRandomPassword() {
         return "1Wa$" + generateRandomString(RandomUtils.LOWERCASE_ALPHA + RandomUtils.UPPERCASE_ALPHA + RandomUtils.NUMERICAL + RandomUtils.SPECIAL_CHARACTERS, 10);
     }

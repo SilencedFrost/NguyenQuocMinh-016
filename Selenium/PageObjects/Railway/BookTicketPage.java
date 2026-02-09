@@ -78,10 +78,7 @@ public class BookTicketPage extends GeneralPage{
         return this;
     }
 
-    /**
-     * @param amount 1-10, if outside this range, default will be 1
-     * @return the page object
-     */
+    // amount 1-10, if outside this range, default will be 1
     public BookTicketPage selectTicketAmount(Integer amount) {
         if(amount < 1 || amount > 10) {
             amount = 1;
@@ -90,10 +87,7 @@ public class BookTicketPage extends GeneralPage{
         return this;
     }
 
-    /**
-     * Set any params as NULL to leave as form default
-     * @return BookTicketPage
-     */
+    // Setting any params as NULL to leave the field as form default
     public BookTicketPage bookTicket(LocalDate departDate, Location departLocation, Location arriveLocation, SeatType seatType, Integer amount) {
         if(departDate != null) selectDepartDate(departDate);
         if(departLocation != null){

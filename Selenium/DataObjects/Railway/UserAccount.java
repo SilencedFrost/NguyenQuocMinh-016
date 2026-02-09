@@ -24,15 +24,11 @@ public class UserAccount {
         this.pid = pid;
     }
 
-    /**
-     * Returns a UserAccount object with default information
-     */
+    // Returns a UserAccount object with default information
     public UserAccount() {
     }
 
-    /**
-     * @return a UserAccount object with randomized information
-     */
+    // Return a UserAccount object with randomized information
     public UserAccount getRandomUser(String emailDomain) {
         this.username = RandomUtils.generateRandomString(15);
         this.domain = emailDomain;
