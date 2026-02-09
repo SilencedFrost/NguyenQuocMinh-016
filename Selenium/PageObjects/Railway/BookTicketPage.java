@@ -6,6 +6,7 @@ import Common.Constant.Constant;
 import Common.Constant.Railway.Location;
 import Common.Constant.Railway.SeatType;
 import Common.Constant.Railway.TicketHeader;
+import DataObjects.Railway.TicketInformation;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
@@ -36,6 +37,18 @@ public class BookTicketPage extends GeneralPage{
         return LocalDate.parse(new Select(Utilities.findElement(cboDepartDateLocator)).getFirstSelectedOption().getText(), Constant.DATE_FORMAT);
     }
 
+    public String getDepartLocation() {
+        return new Select(Utilities.findElement(cboDepartLocationLocator)).getFirstSelectedOption().getText();
+    }
+
+    public String getArriveLocation() {
+        return new Select(Utilities.findElement(cboArriveLocationLocator)).getFirstSelectedOption().getText();
+    }
+
+    public String getSeatType() {
+        return new Select(Utilities.findElement(cboSeatTypeLocator)).getFirstSelectedOption().getText();
+    }
+
     public String getTitle() {
         return Utilities.findElement(lblTitleLocator).getText();
     }
@@ -50,12 +63,12 @@ public class BookTicketPage extends GeneralPage{
     }
 
     public BookTicketPage selectDepartLocation(Location location) {
-        Utilities.selectComboboxByVisibleText(cboDepartLocationLocator, location.getVisibleText());
+        Utilities.selectComboboxByVisibleText(cboDepartLocationLocator, location.getText());
         return this;
     }
 
     public BookTicketPage selectArriveLocation(Location location) {
-        Utilities.selectComboboxByVisibleText(cboArriveLocationLocator, location.getVisibleText());
+        Utilities.selectComboboxByVisibleText(cboArriveLocationLocator, location.getText());
         return this;
     }
 
@@ -76,14 +89,24 @@ public class BookTicketPage extends GeneralPage{
         return this;
     }
 
-    public BookTicketPage bookTicket(LocalDate date, Location departLocation, Location arriveLocation, SeatType seatType, Integer amount) {
-        selectDepartDate(date);
-        selectDepartLocation(departLocation);
-        WaitUtils.waitForElementStale(cboArriveLocationLocator);
-        selectArriveLocation(arriveLocation);
-        selectSeatType(seatType);
-        selectTicketAmount(amount);
+    /**
+     * Set any params as NULL to leave as form default
+     * @return BookTicketPage
+     */
+    public BookTicketPage bookTicket(LocalDate departDate, Location departLocation, Location arriveLocation, SeatType seatType, Integer amount) {
+        if(departDate != null) selectDepartDate(departDate);
+        if(departLocation != null){
+            selectDepartLocation(departLocation);
+            WaitUtils.waitForElementStale(cboArriveLocationLocator);
+        }
+        if(arriveLocation != null) selectArriveLocation(arriveLocation);
+        if(seatType != null) selectSeatType(seatType);
+        if(amount != null) selectTicketAmount(amount);
         Utilities.click(btnSubmitLocator);
         return this;
+    }
+
+    public BookTicketPage bookTicket(TicketInformation ticketInformation) {
+        return this.bookTicket(ticketInformation.getDepartDate(), ticketInformation.getDepartLocation(), ticketInformation.getArriveLocation(), ticketInformation.getSeatType(), ticketInformation.getTicketAmount());
     }
 }

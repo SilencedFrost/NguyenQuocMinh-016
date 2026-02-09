@@ -20,16 +20,31 @@ public class TimetablePage extends GeneralPage{
         return Utilities.isElementPresent(By.xpath("//div[@id='menu']//a[@href='TrainTimeListPage.cshtml']/parent::li[@class='selected']"));
     }
 
+    private String getTableRowXpathWhereDepartAndArriveLocationIs(Location departLocation, Location arriveLocation) {
+        String departLocationXpathFragment = String.format(tblRowSelectorByHeaderAndValueXpathFragment, TimetableHeader.DEPART_STATION.getText(), departLocation.getText());
+        String arriveLocationXpathFragment = String.format(tblRowSelectorByHeaderAndValueXpathFragment, TimetableHeader.ARRIVE_STATION.getText(), arriveLocation.getText());
+
+        return tblXpath + rowXpath + departLocationXpathFragment + arriveLocationXpathFragment;
+    }
+
     public TicketPricePage checkPriceWhereDepartAndArriveLocationIs(Location departLocation, Location arriveLocation) {
-        String departLocationXpathFragment = String.format(tblRowSelectorByHeaderAndValueXpathFragment, TimetableHeader.DEPART_STATION.getText(), departLocation.getVisibleText());
-        String arriveLocationXpathFragment = String.format(tblRowSelectorByHeaderAndValueXpathFragment, TimetableHeader.ARRIVE_STATION.getText(), arriveLocation.getVisibleText());
         String btnXpath = String.format(btnXpathFragment, TimetableFeature.CHECK_PRICE.getUrl());
 
-        String fullXPath = tblXpath + rowXpath + departLocationXpathFragment + arriveLocationXpathFragment + btnXpath;
+        String fullXPath = getTableRowXpathWhereDepartAndArriveLocationIs(departLocation, arriveLocation) + btnXpath;
 
         Utilities.click(By.xpath(fullXPath));
 
         return new TicketPricePage();
+    }
+
+    public BookTicketPage bookTicketWhereDepartAndArriveLocationIs(Location departLocation, Location arriveLocation) {
+        String btnXpath = String.format(btnXpathFragment, TimetableFeature.BOOK_TICKET.getUrl());
+
+        String fullXPath = getTableRowXpathWhereDepartAndArriveLocationIs(departLocation, arriveLocation) + btnXpath;
+
+        Utilities.click(By.xpath(fullXPath));
+
+        return new BookTicketPage();
     }
 
 }

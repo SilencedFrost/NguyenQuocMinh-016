@@ -45,4 +45,14 @@ public class TicketInformation {
     public void setDepartDate(LocalDate departDate) {
         this.departDate = departDate;
     }
+
+    public void setSeatType(String text) {
+        for (SeatType type : SeatType.values()) {
+            if (type.getText().equals(text)) {
+                this.seatType = type;
+                return;
+            }
+        }
+        throw new IllegalArgumentException("No SeatType found with text: " + text);
+    }
 }

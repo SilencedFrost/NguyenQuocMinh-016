@@ -4,17 +4,13 @@ import Common.Common.WindowUtils;
 import Common.Constant.Constant;
 import Common.Constant.Railway.MailTitle;
 import Common.Constant.Railway.MenuItem;
+import DataObjects.Railway.UserAccount;
 import PageObjects.GuerrilaMail.InboxPage;
 import PageObjects.Railway.HomePage;
 import PageObjects.Railway.RegisterPage;
 import org.openqa.selenium.WindowType;
 
 public class RegisterAccountFlow {
-
-    public static RegisterPage registerAndActivate(String username, String email, String password, String pid) {
-        register(email, password, pid);
-        return activate(username);
-    }
 
     public static RegisterPage register(String email, String password, String pid) {
         return ((RegisterPage) new HomePage().open().gotoPage(MenuItem.REGISTER))
@@ -34,5 +30,14 @@ public class RegisterAccountFlow {
         WindowUtils.closeFirstWindow();
         return new RegisterPage();
 
+    }
+
+    public static RegisterPage registerAndActivate(String username, String email, String password, String pid) {
+        register(email, password, pid);
+        return activate(username);
+    }
+
+    public static RegisterPage registerAndActivate(UserAccount userAccount) {
+        return registerAndActivate(userAccount.getUsername(), userAccount.getEmail(), userAccount.getPassword(), userAccount.getPid());
     }
 }

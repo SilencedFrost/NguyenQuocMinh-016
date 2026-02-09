@@ -2,7 +2,6 @@ package PageObjects.Railway;
 
 import Common.Common.Utilities;
 import Common.Constant.Railway.SeatType;
-import com.google.common.util.concurrent.ClosingFuture;
 import org.openqa.selenium.By;
 
 public class TicketPricePage extends GeneralPage{

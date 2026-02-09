@@ -9,13 +9,13 @@ public enum Location {
     HUE("Huế"),
     QUANG_NGAI("Quảng Ngãi");
 
-    private final String visibleText;
+    private final String text;
 
-    Location(String visibleText) {
-        this.visibleText = visibleText;
+    Location(String text) {
+        this.text = text;
     }
 
-    public String getVisibleText() {
-        return this.visibleText;
+    public String getText() {
+        return this.text;
     }
 }
