@@ -7,8 +7,6 @@ public class FaqPage extends GeneralPage{
 
     // Locators
 
-    // Elements
-
     // Methods
     @Override
     public boolean isPageShown() {
