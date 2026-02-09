@@ -46,15 +46,6 @@ public class LoginPage extends GeneralPage {
             return (T) new HomePage();
         }
     }
-
-    public HomePage expectSuccess() {
-        return new HomePage();
-    }
-
-    public LoginPage expectFailure() {
-        WaitUtils.waitForElementVisible(lblLoginErrorMsg);
-        return this;
-    }
 }
 
 
