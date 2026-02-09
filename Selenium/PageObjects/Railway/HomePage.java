@@ -28,6 +28,4 @@ public class HomePage extends GeneralPage{
     public By getBtnCreateAccount() {
         return this.btnCreateAccount;
     }
-
-
 }
