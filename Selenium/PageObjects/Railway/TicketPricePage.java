@@ -8,7 +8,7 @@ public class TicketPricePage extends GeneralPage{
 
     // Locators
     private final By lblTableHeaderLocator = By.xpath("//div[@class='DivTable']/table//th[@colspan = '7']");
-    private final String tblCellBySeatTypeXpath = "//div[@class='DivTable']/table//tr[./th[contains(., 'Price')]]/td[position() = count(//tr[./th[contains(., 'Seat type')]]/td[.='%s']/preceding-sibling::td) + 1]";
+    private static final String tblCellBySeatTypeXpath = "//div[@class='DivTable']/table//tr[./th[contains(., 'Price')]]/td[position() = count(//tr[./th[contains(., 'Seat type')]]/td[.='%s']/preceding-sibling::td) + 1]";
 
     // Methods
     @Override

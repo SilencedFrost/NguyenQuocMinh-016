@@ -96,8 +96,11 @@ public class BookTicketPage extends GeneralPage{
     public BookTicketPage bookTicket(LocalDate departDate, Location departLocation, Location arriveLocation, SeatType seatType, Integer amount) {
         if(departDate != null) selectDepartDate(departDate);
         if(departLocation != null){
-            selectDepartLocation(departLocation);
-            WaitUtils.waitForElementStale(cboArriveLocationLocator);
+            String currentDepartLocation = this.getDepartLocation();
+            if(!currentDepartLocation.equals(departLocation.getText())) {
+                selectDepartLocation(departLocation);
+                WaitUtils.waitForElementStale(cboArriveLocationLocator);
+            }
         }
         if(arriveLocation != null) selectArriveLocation(arriveLocation);
         if(seatType != null) selectSeatType(seatType);

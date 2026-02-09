@@ -27,6 +27,7 @@ public abstract class GeneralPage {
             case TIMETABLE -> new TimetablePage();
             case TICKET_PRICE -> new TicketPricePage();
             case BOOK_TICKET -> new BookTicketPage();
+            case MY_TICKET -> new MyTicketPage();
             case REGISTER -> new RegisterPage();
             case LOGIN -> new LoginPage();
         };

@@ -7,6 +7,7 @@ public enum TicketHeader {
     DEPART_DATE("Depart Date"),
     BOOK_DATE("Book Date"),
     EXPIRED_DATE("Expired Date"),
+    STATUS("Status"),
     AMOUNT("Amount"),
     TOTAL_PRICE("Total Price");
 

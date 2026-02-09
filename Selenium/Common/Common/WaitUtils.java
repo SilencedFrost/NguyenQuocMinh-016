@@ -71,4 +71,13 @@ public class WaitUtils {
     public static void waitForPageLoad() {
         waitForPageLoad(Constant.PAGE_LOAD_TIMEOUT);
     }
+
+    public static void waitForAlertPresent(Duration timeout) {
+        WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, timeout);
+        wait.until(ExpectedConditions.alertIsPresent());
+    }
+
+    public static void waitForAlertPresent() {
+        waitForAlertPresent(Constant.FIND_ELEMENT_TIMEOUT);
+    }
 }

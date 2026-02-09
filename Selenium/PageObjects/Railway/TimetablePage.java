@@ -11,7 +11,7 @@ public class TimetablePage extends GeneralPage{
     // Locators
     private static final String tblXpath = "//div[@class='DivTable']/table";
     private static final String rowXpath = "//tr";
-        private static final String tblRowSelectorByHeaderAndValueXpathFragment = "[./td[position() = count(//th[.='%s']/preceding-sibling::th) + 1 and .='%s']]";
+    private static final String tblRowSelectorByHeaderAndValueXpathFragment = "[./td[position() = count(//th[.='%s']/preceding-sibling::th) + 1 and .='%s']]";
     private static final String btnXpathFragment = "//a[contains(@href, '%s')]";
 
     // Methods

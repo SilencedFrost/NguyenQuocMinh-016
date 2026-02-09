@@ -7,6 +7,7 @@ public enum MenuItem {
     TIMETABLE("TrainTimeListPage.cshtml"),
     TICKET_PRICE("/Page/TrainPriceListPage.cshtml"),
     BOOK_TICKET("/Page/BookTicketPage.cshtml"),
+    MY_TICKET("/Page/ManageTicket.cshtml"),
     REGISTER("/Account/Register.cshtml"),
     LOGIN("/Account/Login.cshtml");
 
