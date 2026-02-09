@@ -31,9 +31,22 @@ public class RandomUtils {
         return generateRandomString(RandomUtils.LOWERCASE_ALPHA + RandomUtils.UPPERCASE_ALPHA + RandomUtils.NUMERICAL, length);
     }
 
+    // Returns password containing: uppercase letter, lowercase letter, numbers, and special characters
+    public static String generateRandomPassword(int length) {
+        // Fail fast
+        if(length < 5) throw  new IllegalArgumentException("Password length generated via this method can't be less than 5 characters long");
+        // Randomize one of each type to ensure string always has all types
+        String randomNumber = generateRandomString(RandomUtils.NUMERICAL, 1);
+        String randomLowercase = generateRandomString(RandomUtils.LOWERCASE_ALPHA, 1);
+        String randomUppercase = generateRandomString(RandomUtils.UPPERCASE_ALPHA, 1);
+        String randomSpecial = generateRandomString(RandomUtils.SPECIAL_CHARACTERS, 1);
+        String random = generateRandomString(RandomUtils.LOWERCASE_ALPHA + RandomUtils.UPPERCASE_ALPHA + RandomUtils.NUMERICAL + RandomUtils.SPECIAL_CHARACTERS, length - 4);
+        return randomNumber + randomLowercase + randomUppercase + randomSpecial + random;
+    }
+
     // Returns password containing: uppercase letter, lowercase letter, numbers, and special characters that is 14 characters long
     public static String generateRandomPassword() {
-        return "1Wa$" + generateRandomString(RandomUtils.LOWERCASE_ALPHA + RandomUtils.UPPERCASE_ALPHA + RandomUtils.NUMERICAL + RandomUtils.SPECIAL_CHARACTERS, 10);
+        return generateRandomPassword(14);
     }
 
     public static String generateRandomEmail() {
