@@ -1,16 +1,19 @@
 package TestCases.Railway;
 
 import BusinessFlow.Railway.RegisterAccountFlow;
+import Common.Constant.Constant;
 import Common.Constant.EmailDomain;
 import Common.Constant.Railway.Location;
 import Common.Constant.Railway.MenuItem;
 import Common.Constant.Railway.SeatType;
+import Common.Constant.Railway.TicketHeader;
 import DataObjects.Railway.TicketInformation;
 import DataObjects.Railway.UserAccount;
 import PageObjects.Railway.BookTicketPage;
 import PageObjects.Railway.HomePage;
 import PageObjects.Railway.LoginPage;
 import PageObjects.Railway.RegisterPage;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class BookTicketTest extends BaseTest{
@@ -54,6 +57,19 @@ public class BookTicketTest extends BaseTest{
         log.info("Message \"Ticket booked successfully!\" displays.");
         String actualMsg = bookTicketPage.getTitle();
 
+        Assert.assertEquals(actualMsg.trim(), expectedMsg.trim(), "Error message is not displayed as expected");
+
         log.info("Ticket information display correctly (Depart Date,  Depart Station,  Arrive Station,  Seat Type,  Amount)");
+        String actualDepartDate = bookTicketPage.getCellValue(TicketHeader.DEPART_DATE);
+        String actualDepartStation = bookTicketPage.getCellValue(TicketHeader.DEPART_STATION);
+        String actualArriveStation = bookTicketPage.getCellValue(TicketHeader.ARRIVE_STATION);
+        String actualSeatType = bookTicketPage.getCellValue(TicketHeader.SEAT_TYPE);
+        String actualAmount = bookTicketPage.getCellValue(TicketHeader.AMOUNT);
+
+        Assert.assertEquals(actualDepartDate, ticketInformation.getDepartDate().format(Constant.DATE_FORMAT));
+        Assert.assertEquals(actualDepartStation, ticketInformation.getDepartLocation().getVisibleText());
+        Assert.assertEquals(actualArriveStation, ticketInformation.getArriveLocation().getVisibleText());
+        Assert.assertEquals(actualSeatType, ticketInformation.getSeatType().getVisibleText());
+        Assert.assertEquals(actualAmount, ticketInformation.getTicketAmount().toString());
     }
 }

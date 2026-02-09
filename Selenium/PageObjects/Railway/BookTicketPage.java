@@ -4,6 +4,7 @@ import Common.Common.Utilities;
 import Common.Constant.Constant;
 import Common.Constant.Railway.Location;
 import Common.Constant.Railway.SeatType;
+import Common.Constant.Railway.TicketHeader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
@@ -22,6 +23,8 @@ public class BookTicketPage extends GeneralPage{
 
     private final By lblTitleLocator = By.xpath("//div[@id='content']/h1");
 
+    private final String tblCellByHeaderLocatorString = "//tr/td[position() = count(//th[.='%s']/preceding-sibling::th) + 1]";
+
     // Methods
     @Override
     public boolean isPageShown() {
@@ -34,6 +37,10 @@ public class BookTicketPage extends GeneralPage{
 
     public String getTitle() {
         return Utilities.findElement(lblTitleLocator).getText();
+    }
+
+    public String getCellValue(TicketHeader header) {
+        return Utilities.findElement(By.xpath(String.format(tblCellByHeaderLocatorString, header.getText()))).getText();
     }
 
     public BookTicketPage selectDepartDate(LocalDate date) {
