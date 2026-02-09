@@ -1,6 +1,7 @@
 package PageObjects.Railway;
 
 import Common.Common.Utilities;
+import Common.Common.WaitUtils;
 import Common.Constant.Constant;
 import Common.Constant.Railway.Location;
 import Common.Constant.Railway.SeatType;
@@ -78,6 +79,7 @@ public class BookTicketPage extends GeneralPage{
     public BookTicketPage bookTicket(LocalDate date, Location departLocation, Location arriveLocation, SeatType seatType, Integer amount) {
         selectDepartDate(date);
         selectDepartLocation(departLocation);
+        WaitUtils.waitForElementStale(cboArriveLocationLocator);
         selectArriveLocation(arriveLocation);
         selectSeatType(seatType);
         selectTicketAmount(amount);

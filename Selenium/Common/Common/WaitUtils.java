@@ -3,6 +3,7 @@ package Common.Common;
 import Common.Constant.Constant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -12,34 +13,44 @@ import java.util.Objects;
 public class WaitUtils {
 
     // Waits
-    public static By waitForElementVisible(By locator, Duration timeout) {
+    public static WebElement waitForElementVisible(By locator, Duration timeout) {
         WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, timeout);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        return locator;
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    public static By waitForElementVisible(By locator) {
+    public static WebElement waitForElementVisible(By locator) {
         return waitForElementVisible(locator, Constant.FIND_ELEMENT_TIMEOUT);
     }
 
-    public static By waitForElementPresent(By locator, Duration timeout) {
+    public static WebElement waitForElementPresent(By locator, Duration timeout) {
         WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, timeout);
-        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-        return locator;
+        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+
     }
 
-    public static By waitForElementPresent(By locator) {
+    public static WebElement waitForElementPresent(By locator) {
         return waitForElementPresent(locator, Constant.FIND_ELEMENT_TIMEOUT);
     }
 
-    public static By waitForElementClickable(By locator, Duration timeout) {
+    public static WebElement waitForElementClickable(By locator, Duration timeout) {
         WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, timeout);
-        wait.until(ExpectedConditions.elementToBeClickable(locator));
-        return locator;
+        return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
-    public static By waitForElementClickable(By locator) {
+    public static WebElement waitForElementClickable(By locator) {
         return waitForElementClickable(locator, Constant.FIND_ELEMENT_TIMEOUT);
+    }
+
+    public static WebElement waitForElementStale(By locator, Duration timeout) {
+        // Direct findElement call so it does not rely on utility findElement which has code to prevent flakiness
+        WebElement oldElement = Constant.WEBDRIVER.findElement(locator);
+        WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, timeout);
+        wait.until(ExpectedConditions.stalenessOf(oldElement));
+        return Utilities.findElement(locator);
+    }
+
+    public static WebElement waitForElementStale(By locator) {
+        return waitForElementStale(locator, Constant.FIND_ELEMENT_TIMEOUT);
     }
 
     public static void waitForPageLoad(Duration timeout) {
