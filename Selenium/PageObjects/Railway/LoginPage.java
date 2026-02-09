@@ -8,13 +8,13 @@ import org.openqa.selenium.WebElement;
 public class LoginPage extends GeneralPage {
 
     // Locators
-    private final By txtEmailLocator = By.xpath("//input[@id='username']");
-    private final By txtPasswordLocator = By.xpath("//input[@id='password']");
+    private final By txtEmail = By.xpath("//input[@id='username']");
+    private final By txtPassword = By.xpath("//input[@id='password']");
 
-    private final By btnLoginLocator = By.xpath("//input[@value='login']");
-    private final By btnForgotPasswordLocator = By.xpath("//a[@href='/Account/ForgotPassword.cshtml']");
+    private final By btnLogin = By.xpath("//input[@value='login']");
+    private final By btnForgotPassword = By.xpath("//a[@href='/Account/ForgotPassword.cshtml']");
 
-    private final By lblLoginErrorMsgLocator = By.xpath("//p[@class='message error LoginForm']");
+    private final By lblLoginErrorMsg = By.xpath("//p[@class='message error LoginForm']");
 
     // Methods
     @Override
@@ -23,20 +23,20 @@ public class LoginPage extends GeneralPage {
     }
 
     public ForgotPasswordPage clickForgotPassword() {
-        Utilities.click(btnForgotPasswordLocator);
+        Utilities.click(btnForgotPassword);
         return new ForgotPasswordPage();
     }
 
     public String getLoginErrorMessage() {
-        return Utilities.findElement(lblLoginErrorMsgLocator).getText();
+        return Utilities.findElement(lblLoginErrorMsg).getText();
     }
 
     public <T extends GeneralPage> T login(String email, String password) {
-        Utilities.findElement(txtEmailLocator).sendKeys(email);
-        Utilities.findElement(txtPasswordLocator).sendKeys(password);
+        Utilities.findElement(txtEmail).sendKeys(email);
+        Utilities.findElement(txtPassword).sendKeys(password);
 
-        WebElement btnLogin = Utilities.findElement(btnLoginLocator);
-        Utilities.click(btnLoginLocator);
+        WebElement btnLogin = Utilities.findElement(this.btnLogin);
+        Utilities.click(this.btnLogin);
 
         // Wait for form processing
         WaitUtils.waitForElementStale(btnLogin);
@@ -52,7 +52,7 @@ public class LoginPage extends GeneralPage {
     }
 
     public LoginPage expectFailure() {
-        WaitUtils.waitForElementVisible(lblLoginErrorMsgLocator);
+        WaitUtils.waitForElementVisible(lblLoginErrorMsg);
         return this;
     }
 }

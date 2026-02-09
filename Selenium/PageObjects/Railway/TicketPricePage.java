@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 public class TicketPricePage extends GeneralPage{
 
     // Locators
-    private final By lblTableHeaderLocator = By.xpath("//div[@class='DivTable']/table//th[@colspan = '7']");
+    private final By lblTableHeader = By.xpath("//div[@class='DivTable']/table//th[@colspan = '7']");
     private static final String tblCellBySeatTypeXpath = "//div[@class='DivTable']/table//tr[./th[contains(., 'Price')]]/td[position() = count(//tr[./th[contains(., 'Seat type')]]/td[.='%s']/preceding-sibling::td) + 1]";
 
     // Methods
@@ -17,7 +17,7 @@ public class TicketPricePage extends GeneralPage{
     }
 
     public String getTableHeader() {
-        return Utilities.findElement(lblTableHeaderLocator).getText();
+        return Utilities.findElement(lblTableHeader).getText();
     }
 
     public String getSeatPrice(SeatType seatType) {

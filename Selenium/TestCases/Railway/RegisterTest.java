@@ -90,7 +90,7 @@ public class RegisterTest extends BaseTest{
         // Assertion
         log.info("Home page is shown with guide containing href \"create an account\" to \"Register\" page");
         Assert.assertTrue(homePage.isPageShown());
-        Assert.assertTrue(Utilities.isElementPresent(homePage.getBtnCreateAccountLocator()));
+        Assert.assertTrue(Utilities.isElementPresent(homePage.getBtnCreateAccount()));
 
         // Actions
         log.info("2. Click on \"Create an account\"");

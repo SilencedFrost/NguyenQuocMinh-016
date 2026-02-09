@@ -6,9 +6,9 @@ import org.openqa.selenium.By;
 public class ForgotPasswordPage extends GeneralPage{
 
     // Locators
-    private final By txtEmailLocator = By.xpath("//form//input[@id='email']");
+    private final By txtEmail = By.xpath("//form//input[@id='email']");
 
-    private final By btnSubmitLocator = By.xpath("//form//input[@type='submit']");
+    private final By btnSubmit = By.xpath("//form//input[@type='submit']");
 
     // Elements
 
@@ -19,9 +19,9 @@ public class ForgotPasswordPage extends GeneralPage{
     }
 
     public ForgotPasswordPage submitRequest(String email) {
-        Utilities.findElement(txtEmailLocator).sendKeys(email);
+        Utilities.findElement(txtEmail).sendKeys(email);
 
-        Utilities.click(btnSubmitLocator);
+        Utilities.click(btnSubmit);
 
         return this;
     }

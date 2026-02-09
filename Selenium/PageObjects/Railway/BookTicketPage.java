@@ -16,11 +16,11 @@ import java.time.LocalDate;
 public class BookTicketPage extends GeneralPage{
 
     // Locators
-    private final By cboDepartDateLocator = By.xpath("//select[@name='Date']");
-    private final By cboDepartLocationLocator = By.xpath("//select[@name='DepartStation']");
-    private final By cboArriveLocationLocator = By.xpath("//select[@name='ArriveStation']");
-    private final By cboSeatTypeLocator = By.xpath("//select[@name='SeatType']");
-    private final By cboTicketAmountLocator = By.xpath("//select[@name='TicketAmount']");
+    private final By cboDepartDate = By.xpath("//select[@name='Date']");
+    private final By cboDepartLocation = By.xpath("//select[@name='DepartStation']");
+    private final By cboArriveLocation = By.xpath("//select[@name='ArriveStation']");
+    private final By cboSeatType = By.xpath("//select[@name='SeatType']");
+    private final By cboTicketAmount = By.xpath("//select[@name='TicketAmount']");
 
     private final By btnSubmitLocator = By.xpath("//form//input[@type='submit']");
 
@@ -35,19 +35,19 @@ public class BookTicketPage extends GeneralPage{
     }
 
     public LocalDate getDepartDate() {
-        return LocalDate.parse(new Select(Utilities.findElement(cboDepartDateLocator)).getFirstSelectedOption().getText(), Constant.DATE_FORMAT);
+        return LocalDate.parse(new Select(Utilities.findElement(cboDepartDate)).getFirstSelectedOption().getText(), Constant.DATE_FORMAT);
     }
 
     public String getDepartLocation() {
-        return new Select(Utilities.findElement(cboDepartLocationLocator)).getFirstSelectedOption().getText();
+        return new Select(Utilities.findElement(cboDepartLocation)).getFirstSelectedOption().getText();
     }
 
     public String getArriveLocation() {
-        return new Select(Utilities.findElement(cboArriveLocationLocator)).getFirstSelectedOption().getText();
+        return new Select(Utilities.findElement(cboArriveLocation)).getFirstSelectedOption().getText();
     }
 
     public String getSeatType() {
-        return new Select(Utilities.findElement(cboSeatTypeLocator)).getFirstSelectedOption().getText();
+        return new Select(Utilities.findElement(cboSeatType)).getFirstSelectedOption().getText();
     }
 
     public String getTitle() {
@@ -59,22 +59,22 @@ public class BookTicketPage extends GeneralPage{
     }
 
     public BookTicketPage selectDepartDate(LocalDate date) {
-        Utilities.selectComboboxByVisibleText(cboDepartDateLocator, date.format(Constant.DATE_FORMAT));
+        Utilities.selectComboboxByVisibleText(cboDepartDate, date.format(Constant.DATE_FORMAT));
         return this;
     }
 
     public BookTicketPage selectDepartLocation(Location location) {
-        Utilities.selectComboboxByVisibleText(cboDepartLocationLocator, location.getText());
+        Utilities.selectComboboxByVisibleText(cboDepartLocation, location.getText());
         return this;
     }
 
     public BookTicketPage selectArriveLocation(Location location) {
-        Utilities.selectComboboxByVisibleText(cboArriveLocationLocator, location.getText());
+        Utilities.selectComboboxByVisibleText(cboArriveLocation, location.getText());
         return this;
     }
 
     public BookTicketPage selectSeatType(SeatType seatType) {
-        Utilities.selectComboboxByVisibleText(cboSeatTypeLocator, seatType.getText());
+        Utilities.selectComboboxByVisibleText(cboSeatType, seatType.getText());
         return this;
     }
 
@@ -83,7 +83,7 @@ public class BookTicketPage extends GeneralPage{
         if(amount < 1 || amount > 10) {
             amount = 1;
         }
-        Utilities.selectComboboxByVisibleText(cboTicketAmountLocator, amount.toString());
+        Utilities.selectComboboxByVisibleText(cboTicketAmount, amount.toString());
         return this;
     }
 
@@ -93,7 +93,7 @@ public class BookTicketPage extends GeneralPage{
         if(departLocation != null){
             String currentDepartLocation = this.getDepartLocation();
             if(!currentDepartLocation.equals(departLocation.getText())) {
-                WebElement cboArriveLocation = Utilities.findElement(cboArriveLocationLocator);
+                WebElement cboArriveLocation = Utilities.findElement(this.cboArriveLocation);
                 selectDepartLocation(departLocation);
                 WaitUtils.waitForElementStale(cboArriveLocation);
             }

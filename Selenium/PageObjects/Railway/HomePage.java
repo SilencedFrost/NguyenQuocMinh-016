@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 public class HomePage extends GeneralPage{
 
     // Locators
-    private final By btnCreateAccountLocator = By.xpath("//div[@id='content']//a[@href='/Account/Register.cshtml']");
+    private final By btnCreateAccount = By.xpath("//div[@id='content']//a[@href='/Account/Register.cshtml']");
 
     // Methods
     @Override
@@ -21,12 +21,12 @@ public class HomePage extends GeneralPage{
     }
 
     public RegisterPage clickCreateAccount() {
-        Utilities.click(btnCreateAccountLocator);
+        Utilities.click(btnCreateAccount);
         return new RegisterPage();
     }
 
-    public By getBtnCreateAccountLocator() {
-        return this.btnCreateAccountLocator;
+    public By getBtnCreateAccount() {
+        return this.btnCreateAccount;
     }
 
 

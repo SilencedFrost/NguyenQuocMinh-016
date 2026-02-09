@@ -32,6 +32,6 @@ public class LogoutTest extends BaseTest{
         // Assertion
         log.info("Home page displays. \"Log out\" tab is disappeared.");
         Assert.assertTrue(homePage.isPageShown());
-        Assert.assertFalse(Utilities.isElementPresent(faqPage.getTabLogoutLocator()));
+        Assert.assertFalse(Utilities.isElementPresent(faqPage.getTabLogout()));
     }
 }
