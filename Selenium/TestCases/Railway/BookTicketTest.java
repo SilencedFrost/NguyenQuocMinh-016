@@ -34,7 +34,7 @@ public class BookTicketTest extends BaseTest{
         RegisterPage registerPage = RegisterAccountFlow.registerAndActivate(userAccount);
 
         log.info("2. Login with a valid account");
-        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword());
+        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount);
 
         log.info("3. Click on \"Book ticket\" tab");
         BookTicketPage bookTicketPage = (BookTicketPage) homePage.gotoPage(MenuItem.BOOK_TICKET);
@@ -84,7 +84,7 @@ public class BookTicketTest extends BaseTest{
         RegisterPage registerPage = RegisterAccountFlow.registerAndActivate(userAccount);
 
         log.info("2. Login with a valid account");
-        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword());
+        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount);
 
         log.info("3. Click on \"Book ticket\" tab");
         BookTicketPage bookTicketPage = (BookTicketPage) homePage.gotoPage(MenuItem.BOOK_TICKET);
@@ -132,13 +132,13 @@ public class BookTicketTest extends BaseTest{
         RegisterPage registerPage = RegisterAccountFlow.registerAndActivate(userAccount);
 
         log.info("2. Login with a valid account");
-        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword());
+        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount);
 
         log.info("3. Click on \"Timetable\" tab");
         TimetablePage timetablePage = (TimetablePage) homePage.gotoPage(MenuItem.TIMETABLE);
 
         log.info("4. Click on \"check price\" link of the route from \"Đà Nẵng\" to \"Sài Gòn\"");
-        TicketPricePage ticketPricePage = timetablePage.checkPriceForRoute(ticketPriceInformation.getDepartLocation(), ticketPriceInformation.getArriveLocation());
+        TicketPricePage ticketPricePage = timetablePage.checkPriceForRoute(ticketPriceInformation);
 
         // Assertions
         log.info("\"Ticket Price\" page is loaded.\"Ticket Price\" page is loaded.");
@@ -180,13 +180,13 @@ public class BookTicketTest extends BaseTest{
         RegisterPage registerPage = RegisterAccountFlow.registerAndActivate(userAccount);
 
         log.info("2. Login with a valid account");
-        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword());
+        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount);
 
         log.info("3. Click on \"Timetable\" tab");
         TimetablePage timetablePage = (TimetablePage) homePage.gotoPage(MenuItem.TIMETABLE);
 
         log.info("4. Click on book ticket of route \"Quảng Ngãi\" to \"Huế\"");
-        BookTicketPage bookTicketPage = timetablePage.bookTicketForRoute(ticketInformation.getDepartLocation(), ticketInformation.getArriveLocation());
+        BookTicketPage bookTicketPage = timetablePage.bookTicketForRoute(ticketInformation);
 
         // Assertions
         log.info("Book ticket form is shown with the corrected \"depart from\" and \"Arrive at\"");

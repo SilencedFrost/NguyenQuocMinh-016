@@ -4,6 +4,8 @@ import Common.Common.Utilities;
 import Common.Constant.Railway.Location;
 import Common.Constant.Railway.TimetableFeature;
 import Common.Constant.Railway.TimetableHeader;
+import DataObjects.Railway.TicketInformation;
+import DataObjects.Railway.TicketPriceInformation;
 import org.openqa.selenium.By;
 
 public class TimetablePage extends GeneralPage{
@@ -38,11 +40,27 @@ public class TimetablePage extends GeneralPage{
         return new TicketPricePage();
     }
 
+    public TicketPricePage checkPriceForRoute(TicketPriceInformation ticketPriceInformation) {
+        return this.checkPriceForRoute(ticketPriceInformation.getDepartLocation(), ticketPriceInformation.getArriveLocation());
+    }
+
+    public TicketPricePage checkPriceForRoute(TicketInformation ticketInformation) {
+        return this.checkPriceForRoute(ticketInformation.getDepartLocation(), ticketInformation.getArriveLocation());
+    }
+
     public BookTicketPage bookTicketForRoute(Location departLocation, Location arriveLocation) {
         String btnXpath = String.format(btnOptionXpath, TimetableFeature.BOOK_TICKET.getUrl());
         String fullXPath = buildRowXpathForDepartureAndArrival(departLocation, arriveLocation) + btnXpath;
         Utilities.click(By.xpath(fullXPath));
 
         return new BookTicketPage();
+    }
+
+    public BookTicketPage bookTicketForRoute(TicketPriceInformation ticketPriceInformation) {
+        return this.bookTicketForRoute(ticketPriceInformation.getDepartLocation(), ticketPriceInformation.getArriveLocation());
+    }
+
+    public BookTicketPage bookTicketForRoute(TicketInformation ticketInformation) {
+        return this.bookTicketForRoute(ticketInformation.getDepartLocation(), ticketInformation.getArriveLocation());
     }
 }

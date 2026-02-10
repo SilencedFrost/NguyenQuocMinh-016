@@ -49,15 +49,19 @@ public class RandomUtils {
         return generateRandomPassword(14);
     }
 
-    public static String generateRandomEmail() {
+    public static String generateRandomEmail(String domain) {
         // Generate random username (8-12 characters)
         int usernameLength = 8 + random.nextInt(5); // 8 to 12
         String username = generateRandomString(usernameLength);
 
+        return username + "@" + domain;
+    }
+
+    public static String generateRandomEmail() {
         // Common email domains
         String[] domains = {"gmail.com", "yahoo.com", "outlook.com", "example.com"};
         String domain = domains[random.nextInt(domains.length)];
 
-        return username + "@" + domain;
+        return generateRandomEmail(domain);
     }
 }

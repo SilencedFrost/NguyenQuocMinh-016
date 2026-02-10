@@ -1,15 +1,23 @@
 package DataObjects.Railway;
 
 import Common.Common.RandomUtils;
-import Common.Constant.EmailDomain;
+import Common.Constant.Railway.AccountDefault;
 
 public class UserAccount {
 
-    private String username = "minhnguyenq2006";
-    private String domain = EmailDomain.GMAIL;
-    private String password = "DefaultP4$$";
-    private String pid = "12345678";
+    private String username;
+    private String domain;
+    private String password;
+    private String pid;
 
+    // Returns a UserAccount object with default information
+    public UserAccount() {
+        this(AccountDefault.EMAIL_VALID, AccountDefault.PASSWORD_VALID);
+    }
+
+    public UserAccount(String email, String password) {
+        this(email, password, AccountDefault.PID_VALID);
+    }
 
     public UserAccount(String email, String password, String pid) {
         this.setEmail(email);
@@ -24,14 +32,16 @@ public class UserAccount {
         this.pid = pid;
     }
 
-    // Returns a UserAccount object with default information
-    public UserAccount() {
-    }
-
     // Return a UserAccount object with randomized information
     public UserAccount getRandomUser(String emailDomain) {
-        this.username = RandomUtils.generateRandomString(15);
-        this.domain = emailDomain;
+        this.setEmail(RandomUtils.generateRandomEmail(emailDomain));
+        this.password = RandomUtils.generateRandomPassword();
+        this.pid = RandomUtils.generateRandomString(RandomUtils.NUMERICAL, 12);
+        return this;
+    }
+
+    public UserAccount getRandomUser() {
+        this.setEmail(RandomUtils.generateRandomEmail());
         this.password = RandomUtils.generateRandomPassword();
         this.pid = RandomUtils.generateRandomString(RandomUtils.NUMERICAL, 12);
         return this;
@@ -58,7 +68,7 @@ public class UserAccount {
         return this.pid;
     }
 
-    public void setEmail(String email) {
+    protected void setEmail(String email) {
         if (email == null || email.trim().isEmpty()) {
             this.username = "";
             this.domain = "";

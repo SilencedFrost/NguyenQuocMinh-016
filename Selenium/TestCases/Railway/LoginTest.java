@@ -2,6 +2,8 @@ package TestCases.Railway;
 
 import Common.Common.RandomUtils;
 import Common.Common.WaitUtils;
+import Common.Constant.EmailDomain;
+import Common.Constant.Railway.AccountDefault;
 import Common.Constant.Railway.MenuItem;
 import DataObjects.Railway.UserAccount;
 import PageObjects.Railway.HomePage;
@@ -27,7 +29,7 @@ public class LoginTest extends BaseTest {
 
         log.info("3. Enter valid Email and Password");
         log.info("4. Click on \"Login\" button");
-        HomePage homePage = loginPage.login(userAccount.getEmail(), userAccount.getPassword());
+        HomePage homePage = loginPage.login(userAccount);
         WaitUtils.waitForPageLoad();
 
         log.info("User is logged into Railway. Welcome user message is displayed.");
@@ -42,7 +44,7 @@ public class LoginTest extends BaseTest {
         log.info("TC02 - User cannot log in with blank \"Username\" textbox");
 
         // Data
-        UserAccount userAccount = new UserAccount();
+        UserAccount userAccount = new UserAccount("", AccountDefault.PASSWORD_VALID);
         String expectedMsg = "There was a problem with your login and/or errors exist in your form.";
 
         // Actions
@@ -54,7 +56,7 @@ public class LoginTest extends BaseTest {
         log.info("4. Click on \"Login\" button");
 
         log.info("User can't login and message \"There was a problem with your login and/or errors exist in your form.\" appears.");
-        String actualMsg = ((LoginPage) loginPage.login("", userAccount.getPassword())).getLoginErrorMessage();
+        String actualMsg = ((LoginPage) loginPage.login(userAccount)).getLoginErrorMessage();
 
         // Assertion
         Assert.assertEquals(actualMsg.trim(), expectedMsg.trim(), "Error message is not displayed as expected");
@@ -65,7 +67,7 @@ public class LoginTest extends BaseTest {
         log.info("TC03 - User cannot log into Railway with invalid password");
 
         // Data
-        UserAccount userAccount = new UserAccount();
+        UserAccount userAccount = new UserAccount(AccountDefault.EMAIL_VALID, RandomUtils.generateRandomPassword());
         String expectedMsg = "There was a problem with your login and/or errors exist in your form.";
 
         // Actions
@@ -77,7 +79,7 @@ public class LoginTest extends BaseTest {
         log.info("4. Click on \"Login\" button");
 
         log.info("Error message \"There was a problem with your login and/or errors exist in your form.\" is displayed");
-        String actualMsg = ((LoginPage) loginPage.login(userAccount.getEmail(), RandomUtils.generateRandomPassword())).getLoginErrorMessage();
+        String actualMsg = ((LoginPage) loginPage.login(userAccount)).getLoginErrorMessage();
 
         // Assertion
         Assert.assertEquals(actualMsg.trim(), expectedMsg.trim(), "Error message is not displayed as expected");
@@ -88,7 +90,7 @@ public class LoginTest extends BaseTest {
         log.info("TC04 - System shows message when user enters wrong password many times");
 
         // Data
-        UserAccount userAccount = new UserAccount();
+        UserAccount userAccount = new UserAccount(AccountDefault.EMAIL_VALID, RandomUtils.generateRandomPassword());
         String expectedLoginMsg = "Invalid username or password. Please try again.";
         String expectedAttemptWarningMsg = "You have used 4 out of 5 login attempts. After all 5 have been used, you will be unable to login for 15 minutes.";
 
@@ -104,7 +106,7 @@ public class LoginTest extends BaseTest {
             log.info("3. Enter valid information into \"Username\" textbox except \"Password\" textbox.");
             log.info("4. Click on \"Login\" button");
             log.info("\"Invalid username or password. Please try again\" is shown");
-            String actualLoginMsg = ((LoginPage) loginPage.login(userAccount.getEmail(), RandomUtils.generateRandomPassword())).getLoginErrorMessage();
+            String actualLoginMsg = ((LoginPage) loginPage.login(userAccount)).getLoginErrorMessage();
 
             // Assertion
             Assert.assertEquals(actualLoginMsg.trim(), expectedLoginMsg.trim(), "Error message is not displayed as expected");
@@ -122,7 +124,7 @@ public class LoginTest extends BaseTest {
         log.info("TC05 - User can't login with an account hasn't been activated");
 
         // Data
-        UserAccount userAccount = new UserAccount(RandomUtils.generateRandomEmail(), RandomUtils.generateRandomPassword(), RandomUtils.generateRandomString(RandomUtils.NUMERICAL, 10));
+        UserAccount userAccount = new UserAccount().getRandomUser(EmailDomain.GUERRILLA);
         String expectedMsg = "Invalid username or password. Please try again.";
 
         // Actions
@@ -137,7 +139,7 @@ public class LoginTest extends BaseTest {
         log.info("4. Click on \"Login\" button");
 
         log.info("User can't login and message \"Invalid username or password. Please try again.\" appears.");
-        String actualMsg = ((LoginPage) loginPage.login(userAccount.getEmail(), userAccount.getPassword())).getLoginErrorMessage();
+        String actualMsg = ((LoginPage) loginPage.login(userAccount)).getLoginErrorMessage();
 
         // Assertion
         Assert.assertEquals(actualMsg.trim(), expectedMsg.trim(), "Error message is not displayed as expected");

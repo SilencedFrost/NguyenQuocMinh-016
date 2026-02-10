@@ -128,7 +128,7 @@ public class RegisterTest extends BaseTest{
         WindowUtils.switchToLatestWindow();
         WindowUtils.closeFirstWindow();
 
-        //Assertion
+        // Assertion
         log.info("Redirect to Railways page and message \"Registration Confirmed! You can now log in to the site\" is shown");
         String actualConfirmationMsg = registerPage.getConfirmMsg();
 

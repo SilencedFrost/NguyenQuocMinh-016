@@ -29,7 +29,7 @@ public class CancelBookingTest extends BaseTest{
         RegisterPage registerPage = RegisterAccountFlow.registerAndActivate(userAccount);
 
         log.info("2. Login with a valid account");
-        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount.getEmail(), userAccount.getPassword());
+        HomePage homePage = ((LoginPage) registerPage.gotoPage(MenuItem.LOGIN)).login(userAccount);
 
         log.info("3. Book a ticket");
         BookTicketPage bookTicketPage = ((BookTicketPage) homePage.gotoPage(MenuItem.BOOK_TICKET)).bookTicket(ticketInformation);

@@ -2,6 +2,7 @@ package PageObjects.Railway;
 
 import Common.Common.Utilities;
 import Common.Common.WaitUtils;
+import DataObjects.Railway.UserAccount;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -45,6 +46,10 @@ public class LoginPage extends GeneralPage {
         } else {
             return (T) new HomePage();
         }
+    }
+
+    public <T extends GeneralPage> T login(UserAccount userAccount) {
+        return this.login(userAccount.getEmail(), userAccount.getPassword());
     }
 }
 
