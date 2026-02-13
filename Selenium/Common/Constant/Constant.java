@@ -10,6 +10,7 @@ public class Constant {
 
     public static WebDriver WEBDRIVER;
     public static final String RAILWAY_URL = "http://saferailway.somee.com/Page/HomePage.cshtml";
+    public static final String AUTOMATION_EXERCISE_URL = "https://www.automationexercise.com/";
     public static final String GUERRILLA_URL = "https://www.guerrillamail.com/inbox";
     public static final String RAILWAY_CONFIRM_REGISTRATION_URL = "www.saferailway.somee.com/Account/Confirm";
     public static final String RAILWAY_RESET_PASSWORD_URL = "http://www.saferailway.somee.com/Account/PasswordReset";

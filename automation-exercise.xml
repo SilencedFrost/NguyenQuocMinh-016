@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Railway Automation Test Suite" verbose="1"
+       parallel="methods" thread-count="1">
+
+    <test name="All cases">
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="TestCases.AutomationExercise.ReviewTest" />
+            <class name="TestCases.AutomationExercise.CheckoutTest" />
+        </classes>
+    </test>
+</suite>

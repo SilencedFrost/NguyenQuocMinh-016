@@ -3,6 +3,7 @@ package Common.Common;
 import Common.Constant.Constant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,6 +23,18 @@ public class WaitUtils {
         return waitForElementVisible(locator, Constant.FIND_ELEMENT_TIMEOUT);
     }
 
+    public static WebElement safeWaitForElementVisible(By locator, Duration timeout) {
+        try {
+            return waitForElementVisible(locator, timeout);
+        } catch (TimeoutException e) {
+            return  null;
+        }
+    }
+
+    public static WebElement safeWaitForElementVisible(By locator) {
+        return safeWaitForElementVisible(locator, Constant.FIND_ELEMENT_TIMEOUT);
+    }
+
     public static WebElement waitForElementPresent(By locator, Duration timeout) {
         WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, timeout);
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -31,6 +44,19 @@ public class WaitUtils {
     public static WebElement waitForElementPresent(By locator) {
         return waitForElementPresent(locator, Constant.FIND_ELEMENT_TIMEOUT);
     }
+
+    public static WebElement safeWaitForElementPresent(By locator, Duration timeout) {
+        try {
+            return waitForElementPresent(locator, timeout);
+        } catch (TimeoutException e) {
+            return  null;
+        }
+    }
+
+    public static WebElement safeWaitForElementPresent(By locator) {
+        return safeWaitForElementPresent(locator, Constant.FIND_ELEMENT_TIMEOUT);
+    }
+
 
     public static WebElement waitForElementClickable(By locator, Duration timeout) {
         WebDriverWait wait = new WebDriverWait(Constant.WEBDRIVER, timeout);

@@ -1,10 +1,7 @@
 package Common.Common;
 
 import Common.Constant.Constant;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
@@ -19,6 +16,15 @@ public class Utilities {
             return true;
         } catch(NoSuchElementException e) {
             return false;
+        }
+    }
+
+    public static boolean isElementStale(WebElement webElement) {
+        try {
+            webElement.isDisplayed();
+            return false;
+        } catch (StaleElementReferenceException e) {
+            return true;
         }
     }
 
@@ -54,15 +60,17 @@ public class Utilities {
     }
 
     // Actions
-    public static void click(By locator, Duration timeout){
+    public static WebElement click(By locator, Duration timeout){
         WaitUtils.waitForElementVisible(locator, timeout);
         scrollToElement(locator, timeout);
         WaitUtils.waitForElementClickable(locator, timeout);
-        findElement(locator).click();
+        WebElement element = findElement(locator);
+        element.click();
+        return element;
     }
 
-    public static void click(By locator) {
-        click(locator, Constant.FIND_ELEMENT_TIMEOUT);
+    public static WebElement click(By locator) {
+        return click(locator, Constant.FIND_ELEMENT_TIMEOUT);
     }
 
     public static By scrollToElement(By locator, Duration timeout) {
@@ -85,5 +93,24 @@ public class Utilities {
 
     public static By selectComboboxByVisibleText(By locator, String visibleText) {
         return selectComboboxByVisibleText(locator, visibleText, Constant.FIND_ELEMENT_TIMEOUT);
+    }
+
+    public static void disableGoogleAd() {
+        String advertisementFullscreenContainer = "//ins[@class='adsbygoogle adsbygoogle-noablate' and contains(@style, '100vw')]";
+        String iframeAdvertisementContainer = "//iframe[contains(@id, 'aswift')]";
+        By iframeAdvertisement = By.xpath("//iframe[@id='ad_iframe']");
+        By btnCloseAdvertisement = By.xpath("//div[contains(@id, 'dismiss-button') or contains(@id, 'close-button')]");
+
+        WebElement advertisement = WaitUtils.safeWaitForElementVisible(By.xpath(advertisementFullscreenContainer), Duration.ofSeconds(1));
+        if(advertisement != null) {
+            Constant.WEBDRIVER.switchTo().frame(Utilities.findElement(By.xpath(advertisementFullscreenContainer + iframeAdvertisementContainer)));
+            if(isElementPresent(btnCloseAdvertisement)) {
+                Utilities.click(btnCloseAdvertisement);
+            } else {
+                Constant.WEBDRIVER.switchTo().frame(Utilities.findElement(iframeAdvertisement));
+                Utilities.click(btnCloseAdvertisement);
+            }
+            Constant.WEBDRIVER.switchTo().defaultContent();
+        }
     }
 }

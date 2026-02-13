@@ -64,4 +64,12 @@ public class RandomUtils {
 
         return generateRandomEmail(domain);
     }
+
+    public static int randomInt(int start, int end) {
+        return random.nextInt(start, end);
+    }
+
+    public static int randomInt(int end) {
+        return randomInt(1, end);
+    }
 }
